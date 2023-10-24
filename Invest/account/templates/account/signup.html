@@ -1,0 +1,64 @@
+{% extends 'base_template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/signup.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Регистрация
+{% endblock %}
+    
+{% block content %}
+
+    <div class="signup_container">
+        {{ errors }}
+        <h1>Регистрация</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="signup_inputs_container">
+                <div class="input_container">
+                    <img src="/static/img/profile_svg_icon.svg" alt="" class="input_img">
+                    <input name="name" class="signup_input" placeholder="Имя" type="text">
+                </div>
+            </div>
+            <div class="signup_inputs_container">
+                <div class="input_container">
+                    <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
+                    <input name="email" class="signup_input" placeholder="Почта" type="text">
+                </div>
+            </div>
+            <div class="signup_inputs_container">
+                <div class="input_container">
+                    <img src="/static/img/phone_svg_icon.svg" alt="" class="input_img">
+                    <input name="phone" class="signup_input" placeholder="Номер телефона" type="text">
+                </div>
+            </div>
+            <div class="signup_inputs_container">
+                <div class="input_container invest_input_container">
+                    <img src="/static/img/money_svg_icon.svg" alt="" class="input_img">
+                    Инвестиции
+                    <input name="interest" type="radio" value="investing">
+                    Свой проект
+                    <input name="interest" type="radio" value="project">
+                </div>
+            </div>
+            <div class="signup_inputs_container">
+                <div class="input_container">
+                    <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
+                    <input name="password1" class="signup_input" placeholder="Пароль" type="password">
+                </div>
+            </div>
+            <div class="signup_inputs_container">
+                <div class="input_container">
+                    <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
+                    <input name="password2" class="signup_input" placeholder="Повторение пароля" type="password">
+                </div>
+            </div>
+            <div class="container_button">
+                <input type="submit" value="Присоединиться">
+                <a href="{% url 'login' %}">Войти</a>
+            </div>
+        </form>
+    </div>
+    <script src="/static/js/SignupScripts.js"></script>
+{% endblock %}

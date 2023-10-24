@@ -1,0 +1,68 @@
+{% extends 'base_template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/project_styles.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Объявление
+{% endblock %}
+    
+{% block content %}
+
+    <div class="project_container">
+        <div class="project_header" style="background-image: url({{ project.background_image.url }});">
+            <div class="header_background_blackout">
+                <div class="category">
+                    Строительство
+                </div>
+                <img src="/media/{{ project.project_avatar }}" class="project_avatar">
+                <h1>{{ project.title }}</h1>
+                <div class="project_help_info">
+                    <div>
+                        Доходность: {{ project.profit_per_month }} <br> 
+                        Требуемые инвестиции: {{project.required_investment}} ₽
+                    </div>
+                    <img src="/static/img/shield_svg_icon.svg">
+                </div>
+            </div>
+        </div>
+        <div class="project_body">
+            <div class="project_main_info">
+                <div class="slider_container">
+                    <span class="slider_nav_element next">&gt;</span>
+                    <span class="slider_nav_element back">&lt;</span>
+                    <div class="slider">
+                        {% for image in project.images.all %}
+                            <div class="slider_img_item_container">
+                                <img class="slider_img_item" src="{{image.image.url}}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="main_info_text">
+                    {{ project.description }}
+                </div>
+            </div>
+            <div class="project_contacts">
+                <div class="project_author">
+                    <a href="#">
+                        {% if profile.avatar %}
+                            <img src="{{profile.avatar.url}}" alt="">
+                        {% else %}
+                            <img style="border-radius: 0;" src="/static/img/profile_svg_icon.svg" alt="">
+                        {% endif %}
+                    </a>
+                    <span>{{ project.user.username }}</span>
+                </div>
+                <div class="action_project_author author_call">
+                    <a href="#">Позвонить</a>
+                </div>
+                <div class="action_project_author author_message">
+                    <a href="#">Написать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/project_scripts.js"></script>
+{% endblock %}

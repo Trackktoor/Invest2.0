@@ -1,0 +1,34 @@
+{% extends 'base_template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Вход
+{% endblock %}
+    
+{% block content %}
+    <div class="login_container">
+        <h1>Вход</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="login_input_container">
+                <div class="input_container">
+                    <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
+                    <input name="username" class="login_input" placeholder="Почта" type="text">
+                </div>
+            </div>
+            <div class="login_input_container">
+                <div class="input_container">
+                    <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
+                    <input name="password" class="login_input" placeholder="Пароль" type="password">
+                </div>
+            </div>
+            <div class="container_button">
+                <input type="submit" value="Войти">
+                <a href="#">Забыл пароль</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

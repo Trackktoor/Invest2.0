@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/signup_link_error.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Вход
+{% endblock %}
+    
+{% block content %}
+<div class="link_error_content">
+Уупс.. Ваша ссылка устарела, попробуйте ещё раз зарегистрироваться! <br> Приносим свои извенения
+<div class="signup_link">
+    <a href="{% url 'signup' %}">Регистрация</a>
+</div>
+</div>
+{% endblock %}  

@@ -1,0 +1,119 @@
+{% extends 'base_template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Вход
+{% endblock %}
+    
+{% block content %}
+    <div class="profile_main_container"> 
+        <div class="side_menu">
+            <div class="side_menu_item">
+                <a href="{% url 'profile' user.id %}">
+                    <img src="/static/img/profile_svg_icon.svg" alt="">
+                    Профиль
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/briefcase_svg_icon.svg" alt="">
+                    Мои проекты
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/message_svg_icon.svg" alt="">
+                    Мессенджер
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/notification_svg_icon.svg" alt="">
+                    Уведомления
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/support_svg_icon.svg" alt="">
+                    Поддержка
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/complaint_svg_icon.svg" alt="">
+                    Ваши жалобы
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/financial_help_svg_icon.svg" alt="">
+                    Помощь проекту
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="#">
+                    <img src="/static/img/achievments_svg_icon.svg" alt="">
+                    Достижения
+                </a>
+            </div>
+            <div class="side_menu_item">
+                <a href="{% url 'logout' %}">
+                    <img src="/static/img/logout_icon.svg" alt="">
+                    Выход
+                </a>
+            </div>
+        </div>
+        <div class="main_info">
+            <div class="main_info_header">
+                <div class="avatar">
+                    <img src="/static/img/example_avatar_profile.png" alt="" class="avatar_img">
+                    <div class="avatar_info">
+                        <h2>{{profile.user.username}}</h2>
+                        {% if profile.profile_status != None %}
+                        {{profile.profile_status}}
+                        {% else %}
+                        Здесь пока пусто...
+                        {% endif %}
+                    </div>
+                    {% if profile.user.id == user.id %}
+                    <div class="change_profile">
+                        <a href="#">Редактировать</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="info_container_inner">
+                    <div class="profile_photos">
+                        {% if profile.images.count != 0 %}
+                        {% for image in profile.images.all %}
+                        <a class="photo_item_a" href="#">
+                            <img src="{{image.image.url}}" alt="" class="photo_item">
+                        </a>
+                        {% endfor %}
+                        <div class="see_all_button_container">
+                            <div class="see_all_button">
+                                <a href="#">Смотреть все</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        Здесь пока пусто..
+                        {% endif %}
+                    </div>
+                    <div class="profile_description">
+                        О себе
+                        <div class="profile_description_text">
+                            {% if profile.profile_info != None %}
+                                {{profile.profile_info}}
+                            {% else %}
+                                Здесь пока пусто..
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
