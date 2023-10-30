@@ -8,6 +8,11 @@ document.getElementById('delete_slide').addEventListener('click', deleteSlide)
 const slider = document.querySelector('.slider');
 const prevButton = document.querySelector('.back');
 const nextButton = document.querySelector('.next');
+const imageInput = document.getElementById('slider_photos-input')
+
+let form = document.getElementsByClassName('project_container')[0]
+
+let sliders_arr = []
 
 let slideIndex = 0;
 
@@ -39,8 +44,8 @@ function previewHeaderBackground(event) {
   
 }
 
-function addSlide() {
-  const imageInput = document.getElementById('slider_photos-input')
+function addSlide(event) {
+  event.preventDefault()
   const slider = document.getElementsByClassName('slider')[0]
 
   if (imageInput.files.length > 0) {
@@ -48,6 +53,7 @@ function addSlide() {
     slide_img.src = URL.createObjectURL(imageInput.files[0])
     slide_img.classList.add('slider_img_item')
     slider.appendChild(slide_img)
+    sliders_arr.push(imageInput.files[0])
   }
 }
 
@@ -86,11 +92,74 @@ function slide(){
   slider.style.transform = `translateX(-${slider.offsetWidth * slideIndex}px)`;
 }
 
-console.log(slider.offsetWidth)
-console.log(slider)
-
 let project_main_info =  document.getElementsByClassName('project_main_info')[0]
 
-console.log()
+document.querySelector('#project_description_textarea').style.width = (project_main_info.offsetWidth-30) + 'px'
 
-document.getElementsByClassName('project_description')[0].style.width = (project_main_info.offsetWidth-30) + 'px'
+function getTextWidth(text) {
+  var canvas = document.createElement("canvas");
+  var context = canvas.getContext("2d");
+  context.font = window.getComputedStyle(document.getElementById("project_city")).getPropertyValue("font");
+  var metrics = context.measureText(text);
+  return metrics.width;
+}
+
+document.getElementById('project_city').addEventListener('input', function(e){
+  textWidth = getTextWidth(e.target.value)
+  if (+textWidth >= 100){
+    e.target.style.width = textWidth+'px'
+  }
+  else {
+    e.target.style.width = '100px'
+  }
+})
+
+document.getElementById('form_submit').addEventListener('click', function(e){
+  e.preventDefault()
+
+  let form = new FormData()
+
+  let avatar = document.getElementById('avatar-input')
+  let title = document.getElementById('title-input').value
+  let profit = document.getElementById('profit-input').value
+  let profit_parametrs = document.getElementsByName('profit_parametr')
+  let background_image = document.getElementsByName('background-image')[0]
+  let profit_parametr = ''
+  for (let i=0; i < profit_parametrs.length; i++){
+    if (profit_parametrs[i].checked){
+      profit_parametr = profit_parametrs[i].value
+    }
+  }
+
+  let required_invest = document.getElementById('required_invest').value  
+  let author_job_title = document.getElementById('author_job_title').value
+  let author_phone_number = document.getElementById('author_phone_number').value
+  let project_description = document.getElementById('project_description_textarea').value
+  let project_city = document.getElementById('project_city').id
+
+  let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value
+
+  form.append('project_avatar', avatar.files[0])
+  form.append('title', title)
+  form.append('profit_per_month', profit)
+  form.append('profit_parametr', profit_parametr)
+  form.append('author_job_title', author_job_title)
+  form.append('contacts', author_phone_number)
+  form.append('description', project_description)
+  form.append('city', project_city)
+
+  for (let i=0; i < sliders_arr.length; i++) {
+    form.append('images', sliders_arr[i])
+  }
+  form.append('background_image', background_image.files[0])
+
+  form.append('required_investment', required_invest)
+  
+  var xhr = new XMLHttpRequest();
+
+  console.log(window.location.href)
+  xhr.open("POST", window.location.href, true);
+  xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
+
+  xhr.send(form);
+})
