@@ -67,7 +67,6 @@ def AddProject(request):
             existing_project.project_avatar = project_avatar
             existing_project.category.set([Category.objects.first()])
 
-            # Сохранить обновленный проект
             existing_project.save()
 
             # Очистить существующие изображения и добавить новые
