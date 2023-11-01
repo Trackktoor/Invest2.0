@@ -31,7 +31,7 @@ def AddProject(request):
         city = request.POST['city']
         required_investment = request.POST['required_investment']
         profit_per_month = request.POST['profit_per_month']
-        profit_parametr = request.POST['profit_parametr']
+        profit_parameter = request.POST['profit_parametr']
         category = Category.objects.first()
         #Создать здесь картинки
         background_image = request.FILES['background_image']
@@ -39,29 +39,79 @@ def AddProject(request):
         contacts = request.POST['contacts']
         author_job_title = request.POST['author_job_title']
 
-        project = Item(
-            title=title,
-            description=description,
-            city=city,
-            required_investment=required_investment,
-            profit_per_month=profit_per_month,
-            profit_parametr=profit_parametr,
-            author_job_title=author_job_title,
-            contacts=contacts,
-            user=request.user
-        )
+        # project = Item(
+        #     title=title,
+        #     description=description,
+        #     city=city,
+        #     required_investment=required_investment,
+        #     profit_per_month=profit_per_month,
+        #     profit_parametr=profit_parameter,
+        #     author_job_title=author_job_title,
+        #     contacts=contacts,
+        #     user=request.user
+        # )
+
+        # Проверить, существует ли проект с таким заголовком и автором
+        existing_project = Item.objects.filter(title=title, user=request.user).first()
+
+        if existing_project:
+            # Если проект существует, обновить его данные
+            existing_project.description = description
+            existing_project.city = city
+            existing_project.required_investment = required_investment
+            existing_project.profit_per_month = profit_per_month
+            existing_project.profit_parameter = profit_parameter
+            existing_project.author_job_title = author_job_title
+            existing_project.contacts = contacts
+            existing_project.background_image = background_image
+            existing_project.project_avatar = project_avatar
+            existing_project.category.set([Category.objects.first()])
+
+            # Сохранить обновленный проект
+            existing_project.save()
+
+            # Очистить существующие изображения и добавить новые
+            existing_project.images.clear()
+            for photo in request.FILES.getlist('images'):
+                new_image = ItemImage(item=existing_project, image=photo)
+                new_image.save()
+        else:
+            # Если проект не существует, создать новый
+            project = Item(
+                title=title,
+                description=description,
+                city=city,
+                required_investment=required_investment,
+                profit_per_month=profit_per_month,
+                profit_parametr=profit_parameter,
+                author_job_title=author_job_title,
+                contacts=contacts,
+                user=request.user,
+                background_image=background_image,
+                project_avatar=project_avatar,
+            )
+            project.save()
+            project.category.add(Category.objects.first())
+
+
         project.save()
-        project.background_image = background_image
-        project.project_avatar = project_avatar
-        
-        for photo in request.FILES.getlist('images'):
-            print("!!!!!!!!!!!!")
-            print(project.id)
-            new_image = ItemImage(item_id=project.id, image=photo)
-            new_image.save()
-            project.images.add(new_image)
         project.category.add(Category.objects.first())
-        project.save()
+
+        for photo in request.FILES.getlist('images'):
+            new_image = ItemImage(item=project, image=photo)
+            new_image.save()
 
         print(project)
         return HttpResponse(str(request.POST))
+
+        # for photo in request.FILES.getlist('images'):
+        #     print("!!!!!!!!!!!!")
+        #     print(project.id)
+        #     new_image = ItemImage(item_id=project.id, image=photo)
+        #     new_image.save()
+        #     project.images.add(new_image)
+        # project.category.add(Category.objects.first())
+        # project.save()
+        #
+        # print(project)
+        # return HttpResponse(str(request.POST))
