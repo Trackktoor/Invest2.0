@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, resolve_url
 from .models import Item, Category, ItemImage
+from django.http import JsonResponse
 from account.models import Profile
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
@@ -25,6 +26,7 @@ def AddProject(request):
     if request.method == 'GET':
         profile = Profile.objects.get(user=request.user)
         return render(request, 'invest_projects/AddProject.html', {'profile':profile})
+    
     if request.method == 'POST':
         title = request.POST['title']
         description = request.POST['description']
@@ -55,13 +57,15 @@ def AddProject(request):
         project.project_avatar = project_avatar
         
         for photo in request.FILES.getlist('images'):
-            print("!!!!!!!!!!!!")
-            print(project.id)
             new_image = ItemImage(item_id=project.id, image=photo)
             new_image.save()
             project.images.add(new_image)
         project.category.add(Category.objects.first())
         project.save()
 
-        print(project)
-        return HttpResponse(str(request.POST))
+        data = {
+            'status': 200,
+            'reverse_url': resolve_url(Project, project_id=project.id)
+        }
+
+        return JsonResponse(data)

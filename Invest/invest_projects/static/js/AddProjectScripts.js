@@ -161,5 +161,16 @@ document.getElementById('form_submit').addEventListener('click', function(e){
   xhr.open("POST", window.location.href, true);
   xhr.setRequestHeader("X-CSRFToken", csrfmiddlewaretoken);
 
+  xhr.onload = function() {
+    console.log(xhr)
+    if (xhr.status === 200) {
+      console.log(xhr)
+      console.log("Ответ с сервера:", xhr.responseText);
+      window.location.href = JSON.parse(xhr.responseText)['reverse_url'];
+    } else {
+      console.log("Произошла ошибка:", xhr.status);
+    }
+  };
+
   xhr.send(form);
 })

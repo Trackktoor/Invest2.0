@@ -86,3 +86,8 @@ local_settings.py
 
 .env
 *.sqlite3
+
+*.jpg
+*.png
+*.svg
+*.pyc
