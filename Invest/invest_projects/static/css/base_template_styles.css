@@ -142,6 +142,7 @@ header {
 .profile > a > img {
     width: 80px;
     height: 80px;
+    border-radius: 50%;
 }
 
 .count_notification {
@@ -187,4 +188,31 @@ footer  h3 {
 .sub_info, .sub_info a {
     color: #9B9B9B;
     align-self: flex-end;
+}
+@media (max-device-width: 632px) {
+    .left_header > a {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media(max-device-width: 800px) {
+    .burger_menu_sub_menu {
+        width: 39%;
+    }
+}
+
+@media(max-device-width: 1100px) {
+    .burger_menu_sub_menu {
+        width: 50%;
+    }
+    .active {
+        right: 21%;
+    }
+}
+
+@media(max-device-width: 496px) {
+    .burger_menu_sub_menu {
+        width: 50%;
+    }
 }

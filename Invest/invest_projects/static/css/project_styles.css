@@ -157,6 +157,8 @@
     max-width: 250px;
     min-width: 120px;
     border-radius: 50%;
+    height: 250px;
+    width: 250px;
 }
 
 .project_author span{
@@ -185,4 +187,42 @@
 .main_info_text {
     font-size: 18px;
     margin-top: 20px;
+}
+
+@media(max-device-width: 1180px) {
+    .project_main_info     {
+        min-width: 58%;
+    }
+}
+@media(max-device-width: 990px) {
+    .project_main_info{
+        min-width: 58%;
+    }
+}   
+
+@media(max-device-width: 990px) {
+    .project_body{
+        flex-wrap: wrap;
+    }
+    .project_main_info {
+        width: 100%;
+    }
+    .project_contacts {
+        margin-left: 0px;
+    }
+    #project_description_textarea {
+        width: auto;
+    }
+    .project_help_info > img {
+        bottom: 28px;
+    }
+    .project_avatar {
+        margin-top: 40px;
+    }
+    .slider_container {
+        display: flex;
+    }
+    .slider_container {
+        height: 390px;
+    }
 }

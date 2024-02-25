@@ -22,14 +22,16 @@
                   </div>
                 </label>
             </div>
-            <div class="category">
-                Строительство
-            </div>
+            <select name="category" class="category input_project_category">
+                {% for category in categories %}
+                    <option value="{{category.title}}">{{ category.title }}</option>
+                {% endfor %}
+            </select>
             <div class="project_avatar">
                 <input type="file" id="avatar-input" name="avatar" accept="image/*" onchange="previewAvatar(event)">
                 <label for="avatar-input">
                   <div class="avatar-preview">
-                    <span class="avatar-label">Логотип проекта </span>
+                    <span class="avatar-label">Логотип проекта</span>
                     <img id="avatar-image" src="#" />
                   </div>
                 </label>

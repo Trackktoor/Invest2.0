@@ -10,7 +10,7 @@ function OverlayHidden(){
     overlay.style.display = 'none'
     burger_menu.style.position = ''
     BurgerMenuFunction()
-}
+}   
 
 function BurgerMenuFunction(){
     let burger_menu = document.getElementsByClassName('burger_menu')[0]
@@ -26,7 +26,18 @@ function BurgerMenuFunction(){
     } else {
         burger_menu.style.position = 'fixed'
         burger_menu.style.right = '10%'
-        burger_menu_sub_menu.style.right = '0px'
+        if (window.innerWidth <= 1100){
+            burger_menu.style.right = '17%'
+        }
+        if (window.innerWidth <= 800){
+            burger_menu.style.right = '16%'
+        }
+        if (window.innerWidth <= 496){
+            burger_menu.style.right = '24%'
+            burger_menu_sub_menu.style.right = '20%'
+    }
+        burger_menu_sub_menu.style.right = '0'
+
         burger_menu.classList.add('active')
         overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
         overlay.style.display = "block";

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Item
+from django.core.validators import validate_email
 
 from .models import SupportMail
 
@@ -31,6 +32,11 @@ class SignupForm(UserCreationForm):
         choices=[('investing', 'Инвестиции'),
                  ('project', 'Привлечение денег в свои проекты')]
     )
+
+    def clean_name(self):
+        name = self.cleaned_data['title']
+        if len(name) == 0:
+            raise 
 
     class Meta:
         """
