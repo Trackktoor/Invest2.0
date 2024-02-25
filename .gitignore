@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io
 venv
+__pycache__
+*.pyc
 ### OSX ###
 .DS_Store
 .AppleDouble
