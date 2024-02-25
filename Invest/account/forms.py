@@ -24,8 +24,8 @@ class SignupForm(UserCreationForm):
         Форма для регистрацию через почту
     """
     name = forms.CharField(max_length=150, required=True)
-    email = forms.EmailField(max_length=200, help_text='Ваша почта', required=True)
-    phone = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(max_length=200, help_text='Ваша почта', required=True, error_messages={"invalid": "Не верный адрес"})
+    phone = forms.CharField(max_length=100, required=True, error_messages={"invalid": "Не верный номер телефона"})
     interest = forms.ChoiceField(
         label='Меня больше интересует',
         widget=forms.RadioSelect,
