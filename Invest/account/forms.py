@@ -34,7 +34,7 @@ class SignupForm(UserCreationForm):
     )
 
     def clean_name(self):
-        name = self.cleaned_data['title']
+        name = self.cleaned_data['name']
         if len(name) == 0:
             raise 
 
