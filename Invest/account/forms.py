@@ -32,6 +32,7 @@ class SignupForm(UserCreationForm):
         choices=[('investing', 'Инвестиции'),
                  ('project', 'Привлечение денег в свои проекты')]
     )
+    
 
     def clean_name(self):
         name = self.cleaned_data['name']
