@@ -143,3 +143,7 @@
         width: 68%;
     }
 }
+
+.error-message {
+    color: red;
+}

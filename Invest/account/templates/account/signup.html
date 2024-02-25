@@ -11,28 +11,32 @@
 {% block content %}
 
     <div class="signup_container">
-        {{ errors }}
+        <!-- {{ errors }} -->
         <h1>Регистрация</h1>
         <form method="POST">
             {% csrf_token %}
+            {{ form.name.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container">
                     <img src="/static/img/profile_svg_icon.svg" alt="" class="input_img">
                     <input name="name" class="signup_input" placeholder="Имя" type="text">
                 </div>
             </div>
+            {{ form.email.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container">
                     <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
                     <input name="email" class="signup_input" placeholder="Почта" type="text">
                 </div>
             </div>
+            {{ form.name.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container">
                     <img src="/static/img/phone_svg_icon.svg" alt="" class="input_img">
                     <input name="phone" class="signup_input" placeholder="Номер телефона" type="text">
                 </div>
             </div>
+            {{ form.name.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container invest_input_container">
                     <div class="invest_input_container__item">
@@ -47,12 +51,14 @@
 
                 </div>
             </div>
+            {{ form.name.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
                     <input name="password1" class="signup_input" placeholder="Пароль" type="password">
                 </div>
             </div>
+            {{ form.name.errors }}
             <div class="signup_inputs_container">
                 <div class="input_container">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
