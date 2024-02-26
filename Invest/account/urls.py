@@ -4,7 +4,7 @@ from . import views
 from . import views_ajax
 
 urlpatterns = [
-    path('', views.Sugnup, name='signup'),
+    path('', views.Signup, name='signup'),
     path('login/', LoginView.as_view(template_name='account/login.html'), name='login'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'), 
     path('<int:user_id>', views.profile, name='profile'),

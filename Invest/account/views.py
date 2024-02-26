@@ -27,7 +27,7 @@ def calculate_image_hash(image):
     return img_hash
 
 
-def Sugnup(request):
+def Signup(request):
     """
         Вьюшка для регистрации через почту
     """
@@ -70,9 +70,6 @@ def Sugnup(request):
             cleaned_data = form.cleaned_data
             return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
-    if request.method == 'GET':
-        form = SignupForm()
-    return render(request, 'account/signup.html')
 
 def LogIn(request):
     if request.method == 'GET':
