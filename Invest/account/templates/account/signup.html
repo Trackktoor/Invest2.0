@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container invest_input_container">
+                <div class="{% if form.interest.errors %}input_container_error{% else %}input_container{% endif %} invest_input_container">
                     <div class="invest_input_container__item">
                         <img src="/static/img/money_svg_icon.svg" alt="" class="input_img">
                         Инвестиции

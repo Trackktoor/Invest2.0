@@ -67,7 +67,8 @@ def Sugnup(request):
             email.send()
             return render(request, 'account/signup_link_send.html')
         else:
-            return render(request, 'account/signup.html', {'form':form, 'errors':form.errors})
+            cleaned_data = form.cleaned_data
+            return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
     if request.method == 'GET':
         form = SignupForm()
