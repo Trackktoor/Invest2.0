@@ -40,7 +40,7 @@ def Signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            user.username = '_'.join([request.POST['name'], str(user.pk)])
+            user.username = '_'.join([request.POST['username'], str(user.pk)])
             user.save()
             profile = Profile(
                 user=user,

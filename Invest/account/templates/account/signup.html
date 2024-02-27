@@ -16,9 +16,9 @@
         <form method="POST">
             {% csrf_token %}
             <div class="signup_inputs_container">
-                <div class="{% if form.name.errors %}input_container_error{% else %}input_container{% endif %}">
+                <div class="{% if form.username.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/profile_svg_icon.svg" alt="" class="input_img">
-                    <input name="name" class="signup_input" placeholder="{% if form.name.errors %}{{ form.name.errors|join:', ' }}{%  else %}Имя{% endif %}" type="text">
+                    <input name="username" class="signup_input" placeholder="{% if form.username.errors %}{{ form.username.errors|join:', ' }}{%  else %}Имя{% endif %}" type="text">
                 </div>
             </div>
             <div class="signup_inputs_container">
@@ -48,9 +48,9 @@
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="{% if form.password1.errors %}input_container_error{% else %}input_container{% endif %}">
+                <div class="{% if form.password.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
-                    <input name="password1" class="signup_input" placeholder="{% if form.password1.errors %}{{ form.password1.errors|join:', ' }}{%  else %}Пароль{% endif %}" type="password">
+                    <input name="password" class="signup_input" placeholder="{% if form.password.errors %}{{ form.password.errors|join:', ' }}{%  else %}Пароль{% endif %}" type="password">
                 </div>
             </div>
             <div class="signup_inputs_container">
