@@ -31,6 +31,9 @@ class SignupForm(forms.ModelForm):
     username = forms.CharField(
         max_length=32,
         required=True,
+        error_messages={
+            "required": "Обязательное поле"
+        }
     )
     email = forms.EmailField(
         max_length=50,
@@ -56,12 +59,16 @@ class SignupForm(forms.ModelForm):
     password = forms.CharField(
         max_length=32,
         min_length=5,
+        required=True,
         error_messages={
+            "required": "Обязательное поле",
             "min_length": "Минимум 5 знаков",
         }
     )
     password2 = forms.CharField(
+        required=True,
         widget=forms.PasswordInput(attrs={
+            "required": "Обязательное поле",
             "placeholder": "Повторить пароль",
         })
     )
