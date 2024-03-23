@@ -35,12 +35,13 @@ class Item(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True)
     required_investment = models.IntegerField(blank=True, null=True)
     profit_per_month = models.CharField(max_length=255, blank=True, null=True)
+    profit_parametr = models.CharField(max_length=100,default='Месяц')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category)
     images = models.ManyToManyField(
         'ItemImage', related_name='images_for_item')
-    background_image = models.ImageField(upload_to=save_image, blank=True, null=True)
-    project_avatar = models.ImageField(upload_to=save_image, blank=True, null=True)
+    background_image = models.ImageField(upload_to=save_image, blank=True, null=True, max_length=500)
+    project_avatar = models.ImageField(upload_to=save_image, blank=True, null=True,max_length=500)
     contacts = models.CharField(max_length=500, blank=True, null=True)
     count_view = models.IntegerField(default=0)
     count_get_contacts = models.IntegerField(default=0)
@@ -48,6 +49,7 @@ class Item(models.Model):
         User, related_name='favorite_items', blank=True, null=True)
     status = models.CharField(max_length=100, default='Проверяется')
     paid_verification = models.BooleanField(default=False)
+    author_job_title = models.CharField(max_length=200, default='Директор')
 
     def __str__(self):
         return str(self.title)
@@ -66,4 +68,4 @@ class ItemImage(models.Model):
     """
     item_id = models.IntegerField(blank=True, null=True)
     image = models.ImageField(
-        upload_to=save_image, blank=True, null=True)
+        upload_to=save_image, blank=True, null=True, max_length=500)

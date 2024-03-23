@@ -21,44 +21,58 @@
         <div class="categories_menu">
             Категории
         </div>
-        <div class="category">
-            <img src="/static/img/cross_icon.svg" alt="">
-            Экология
+        <div class="categories_menu_items">
+            {% for category in categories %}
+            <div class="category">
+                {{category.title}}
+            </div>
+            {% endfor %}
+            
         </div>
-    </div>
-    <div class="container_items">
-        <template id="item_template">
-            <div class="item_container">
-                <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-                <a class="item_image_a" href="#">
-                    <img class="item_image" src="/static/img/park.png" alt="" >
-                </a>
-                <div class="item_info">
-                    <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                        <div class="info_metrics">
-                        <div class="metrics_metric metric_attachments">
-                            <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                            <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                        </div>
-                        <div class="metrics_metric metric_attachments">
-                            <span class="metric_profitability     metric_profitability--info">20%</span>
-                            <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                        </div>
-                        <div class="metrics_metric metric_income">
-                            <span class="metric_info">
-                                <img class="metric_income--img" src="/static/img/money_icon.svg" alt="">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="see_button">
-                    <a href="#">Смотреть</a>
-                </div>
+        <a class="add_new_project_button" href="{% url 'add_project' %}">
+            Добавить свой проект
+        </a>
+        <template id="category_template">
+            <div class="category">
+                <img src="/static/img/cross_icon.svg" alt="">
+                Экология
             </div>
         </template>
     </div>
+    <div class="container_items">
+
+    </div>
 </div>
 
+<template id="item_template">
+    <div class="item_container">
+        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+        <a class="item_image_a" href="#">
+            <img class="item_image" src="/static/img/park.png" alt="" >
+        </a>
+        <div class="item_info">
+            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                <div class="info_metrics">
+                <div class="metrics_metric metric_attachments">
+                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                </div>
+                <div class="metrics_metric metric_attachments">
+                    <span class="metric_profitability     metric_profitability--info">20%</span>
+                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                </div>
+                <div class="metrics_metric metric_income">
+                    <span class="metric_info">
+                        <img class="metric_income--img" src="/static/img/money_icon.svg" alt="">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="see_button">
+            <a href="#">Смотреть</a>
+        </div>
+    </div>
+</template>
 <script src="/static/js/AllInvestProjectsScripts.js"></script>
 
 {% endblock %}

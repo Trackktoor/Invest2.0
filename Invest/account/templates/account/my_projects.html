@@ -1,0 +1,39 @@
+{% extends 'account/base_template_profile.html' %}
+
+{% block styles_account %}
+    <link rel="stylesheet" href="/static/css/my_projects.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Мои проекты
+{% endblock %}
+    
+{% block content_account %}
+<h2 class="page_title">Мои проекты</h2>
+    <div class="project_container">
+        {% csrf_token %}
+        {% for project in projects %}
+            <div class="project_info" >
+                <a href="{% url 'project' project.id %}" class="project_photo">
+                    <div style="background-image: url({{project.images.first.image.url}});" class="project_photo project_photo_div">
+                
+                </div>
+            </a>
+                <div class="project_info_detail">
+                    <div class="project_info_detail__h2">
+                        <h2>{{project.title}}</h2>
+                        <div class="project_category">
+                            {{project.category.first.title}}
+                        </div>
+                    </div>
+                    <p class="project_description">{{project.description|truncatechars:210}}</p>
+                </div>
+                <div class="project_nav">
+                    <div style="{% url 'delete_project' profile.user.id project.id %}" class="nav_delet_project">Удалить</div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <script src="/static/js/my_projects.js"></script>
+{% endblock %}

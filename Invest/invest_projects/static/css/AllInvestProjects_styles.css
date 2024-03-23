@@ -55,8 +55,10 @@
 /*CATEGORIES*/
 
 .categories {
+    position: relative;
     margin-top: 15px;
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }
 
@@ -66,6 +68,29 @@
     border-radius: 15px;
     padding: 10px;
     background-color: #d4e7ff;
+    height: min-content;
+}
+
+.categories_menu_items {
+    position: absolute;
+    top: 60px;
+    background-color: #d4e7ff;  
+    padding: 10px;
+    padding-left: 0;
+    max-width: 520px;
+    max-height: 150px;
+    overflow-y:auto;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    display: none;
+}
+
+.categories_menu_items > div {
+    margin-bottom: 10px;
 }
 
 .categories_menu:hover {
@@ -96,6 +121,14 @@
     cursor: pointer;
 }
 
+.category.clicked::after {
+    content: "✔";
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
 /*ITEMS*/
 
 .container_items {
@@ -105,7 +138,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
 }
 
 .item_container {
@@ -186,4 +218,58 @@
     padding: 10px;
     background-color: #E1FFB1;
     border-radius: 20px;
+}
+
+.add_new_project_button {
+    height: min-content;
+    border: 1px solid black;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    background-color: #E1FFB1;
+    border-radius: 20px;
+}
+
+
+@media(max-device-width: 1250px) {
+    .item_container {
+        width: 32%;
+    }
+}
+
+@media(max-device-width: 1100px) {
+    .burger_menu_sub_menu {
+        width: 29%;
+    }
+    .active {
+        right: 21%;
+    }
+}
+
+@media(max-device-width: 1020px) {
+    .item_container {
+        width: 48%;
+    }
+}
+
+@media(max-device-width: 800px) {
+    .burger_menu_sub_menu {
+        width: 39%;
+    }
+}
+
+@media(max-device-width: 632px) {
+    .item_container {
+        width: 100%;
+    }
+    .left_header > a {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media(max-device-width: 496px) {
+    .burger_menu_sub_menu {
+        width: 50%;
+    }
 }

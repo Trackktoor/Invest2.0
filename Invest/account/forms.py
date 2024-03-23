@@ -1,7 +1,13 @@
+from typing import Any
+import phonenumbers
+
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Item
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
 
 from .models import SupportMail
 
@@ -18,24 +24,99 @@ class ItemForm(forms.ModelForm):
                   'required_investment', 'profit_per_month', 'user', 'category']
 
 
-class SignupForm(UserCreationForm):
+class SignupForm(forms.ModelForm):
     """
         Форма для регистрацию через почту
     """
-    name = forms.CharField(max_length=150, required=True)
-    email = forms.EmailField(max_length=200, help_text='Ваша почта', required=True)
-    phone = forms.CharField(max_length=100, required=True)
+    username = forms.CharField(
+        max_length=32,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле"
+        }
+    )
+    email = forms.EmailField(
+        max_length=50,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле"
+        }
+    )
+    phone = forms.CharField(
+        max_length=32,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле"
+        }
+    )
     interest = forms.ChoiceField(
         label='Меня больше интересует',
+        required=True,
         widget=forms.RadioSelect,
         choices=[('investing', 'Инвестиции'),
                  ('project', 'Привлечение денег в свои проекты')]
     )
-
+    password = forms.CharField(
+        max_length=32,
+        min_length=5,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле",
+            "min_length": "Минимум 5 знаков",
+        }
+    )
+    password2 = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            "required": "Обязательное поле",
+            "placeholder": "Повторить пароль",
+        })
+    )
+    
+    
     class Meta:
         """
             Конфигурация формы
         """
         model = User
-        fields = ('email','name', 'password1', 'password2')
+        fields = ("username", "email",)
 
+
+    def clean_username(self):
+        if not self.cleaned_data['username'].strip():
+            raise forms.ValidationError("Обязательное поле")
+        elif len(self.cleaned_data['username']) < 5:
+            raise forms.ValidationError("Минимум 5 знаков")
+        else:
+            return self.cleaned_data['username']
+        
+    
+    def clean_email(self):
+        try:
+            validate_email(self.cleaned_data["email"])
+        except ValidationError:
+            raise forms.ValidationError("Укажите корректную почту")
+        if User.objects.filter(email=self.cleaned_data["email"]).exists():
+            raise forms.ValidationError("Почта уже зарегистрирована")
+        return self.cleaned_data["email"]
+    
+    
+    def clean_phone(self):
+        try:
+            parse_phone = phonenumbers.parse(self.cleaned_data['phone'], None)
+            if not phonenumbers.is_valid_number(parse_phone):
+                raise ValidationError("Неверный номер телефона")
+        except phonenumbers.phonenumberutil.NumberParseException:
+            raise ValidationError("Неверный номер телефона")
+        return self.cleaned_data['phone']
+    
+    
+    def clean_password2(self):
+        cdata = self.cleaned_data
+        if "password" not in cdata:
+            raise forms.ValidationError("Минимум 5 знаков")
+        if cdata["password"] != cdata["password2"]:
+            raise forms.ValidationError("Пароли не совпадают")
+        else:
+            return cdata["password2"]
+    

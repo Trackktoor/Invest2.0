@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&nw=t1wiy5#x5q+ujpi63^*x83vncyeq)ty-pr=_=6)h=f1blj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'invest_projects',
     'corsheaders',
-    'account'
+    'account',
+    'django_cleanup'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'account.middleware.LastActivityUpdateMiddleware'
+    'account.middleware.LastActivityUpdateMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -74,7 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'account.​context_processors.user_context'
+                'account.context_processors.user_context',
+                'account.context_processors.profile_context'
             ],
         },
     },
@@ -116,7 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -133,7 +136,8 @@ USE_TZ = True
 MEDIA_ROOT = f'{BASE_DIR}/media'
 MEDIA_URL = '/media/'
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = f'{BASE_DIR}/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

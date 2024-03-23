@@ -41,9 +41,15 @@ StarInvest</a>
                 </div>
                 <div class="profile">
                     {% if request.user.is_authenticated %}
+                    {% if profile.avatar %}
+                        <a href="{% url 'profile' user.id %}">
+                            <img src="{{ profile.avatar.url }}" alt="">
+                        </a>
+                    {% else %}
                         <a href="{% url 'profile' user.id %}">
                             <img src="{% static 'img/profile.svg' %}" alt="">
                         </a>
+                    {% endif %}
                     <a href="#" class="count_notification">0</a>
                     
                         {{request.user.username}}

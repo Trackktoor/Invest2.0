@@ -11,47 +11,52 @@
 {% block content %}
 
     <div class="signup_container">
-        {{ errors }}
+        <!-- {{ errors }} -->
         <h1>Регистрация</h1>
         <form method="POST">
             {% csrf_token %}
             <div class="signup_inputs_container">
-                <div class="input_container">
+                <div class="{% if form.username.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/profile_svg_icon.svg" alt="" class="input_img">
-                    <input name="name" class="signup_input" placeholder="Имя" type="text">
+                    <input name="username" class="signup_input" placeholder="{% if form.username.errors %}{{ form.username.errors|join:', ' }}{%  else %}Имя{% endif %}" type="text">
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container">
+                <div class="{% if form.email.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
-                    <input name="email" class="signup_input" placeholder="Почта" type="text">
+                    <input name="email" class="signup_input" placeholder="{% if form.email.errors %}{{ form.email.errors|join:', ' }}{%  else %}Почта{% endif %}" type="text">
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container">
+                <div class="{% if form.phone.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/phone_svg_icon.svg" alt="" class="input_img">
-                    <input name="phone" class="signup_input" placeholder="Номер телефона" type="text">
+                    <input name="phone" class="signup_input" placeholder="{% if form.phone.errors %}{{ form.phone.errors|join:', ' }}{%  else %}Номер телефона{% endif %}" type="text">
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container invest_input_container">
-                    <img src="/static/img/money_svg_icon.svg" alt="" class="input_img">
-                    Инвестиции
-                    <input name="interest" type="radio" value="investing">
-                    Свой проект
-                    <input name="interest" type="radio" value="project">
+                <div class="{% if form.interest.errors %}input_container_error{% else %}input_container{% endif %} invest_input_container">
+                    <div class="invest_input_container__item">
+                        <img src="/static/img/money_svg_icon.svg" alt="" class="input_img">
+                        Инвестиции
+                        <input name="interest" type="radio" value="investing">
+                    </div>
+                    <div class="invest_input_container__item">
+                        Свой проект
+                        <input name="interest" type="radio" value="project">
+                    </div>
+
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container">
+                <div class="{% if form.password.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
-                    <input name="password1" class="signup_input" placeholder="Пароль" type="password">
+                    <input name="password" class="signup_input" placeholder="{% if form.password.errors %}{{ form.password.errors|join:', ' }}{%  else %}Пароль{% endif %}" type="password">
                 </div>
             </div>
             <div class="signup_inputs_container">
-                <div class="input_container">
+                <div class="{% if form.password2.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
-                    <input name="password2" class="signup_input" placeholder="Повторение пароля" type="password">
+                    <input name="password2" class="signup_input" placeholder="{% if form.password2.errors %}{{ form.password2.errors|join:', ' }}{%  else %}Повторение пароля{% endif %}" type="password">
                 </div>
             </div>
             <div class="container_button">

@@ -1,0 +1,116 @@
+{% extends 'account/base_template_profile.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/edit_profile.css">
+{% endblock %}
+
+{% block title %}
+    StarInvest - Редактирование профиля
+{% endblock %}
+    
+{% block content_account %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="main_info_header">
+                    <div class="avatar">
+                        <label for="avatar" class="avatar_img_container">
+                            <input type="file" name="avatar" id="avatar">
+                            <span class="avatar_label_text">Поменять фото</span>
+                            <div class="avatar_blackout"></div>
+                            {% if not profile.avatar %}
+                                <img src="/static/img/profile.svg" alt="" class="avatar_img">
+                            {% else %}
+                                <img src="{{ profile.avatar.url }}" alt="" class="avatar_img">
+                            {% endif %}
+                        </label>
+                        <div class="avatar_info">
+                            <input placeholder="Ваше имя" type="text" name="username" id="username" class="edit_input_text" value="{{profile.user.username}}">
+                            <input type="text" name="status" value="" id="status" class="edit_input_text" placeholder="Ваш статус">
+                        </div>
+
+                    </div>
+                    <div class="info_container_inner">
+                            <template id="template_profile_photo">
+                                <a class="photo_item_a">
+                                    <div class="delete_image">
+                                        <img src="/static/img/dustbin.svg" class="delete_image__icon">
+                                    </div>
+                                </a>
+                            </template>
+                            Ваши фото
+                            <div class="profile_photos">
+
+                                {% for image in profile.images.all %}
+                                <div class="photo_item_a" style="background-image: url({{image.image.url}});">
+                                    <div class="delete_image">
+                                        <img src="/static/img/dustbin.svg" class="delete_image__icon">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <input type="file" id="profile_photos-input" name="slider_photos" multiple >
+                                <label for="profile_photos-input">
+                                    <img class="img_label" src="/static/img/plus_icon.svg" alt="">
+                                </label>
+                            </div>
+                        <div class="profile_description">
+                            О себе
+                            <div class="profile_description_text">
+                                <textarea class="edit_input_text" type="text" name="profile_info" id="profile_info_input">
+                                </textarea>
+                            </div>
+                        </div>
+                        <input id="form_submit" type="submit" value="Сохранить">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        if ('{{profile.profile_status}}' == 'None'){
+            document.getElementById('status').value = ''
+        }
+
+
+        let profile_photos = []
+        profile_photos_old = document.getElementsByClassName('photo_item_a')
+        mime_types_dict = {
+            'jpg': 'image/jpeg',
+            'png': 'image/png'
+        }
+
+        function createFileFromUrl(url, fileName, mimeType) {
+            return fetch(url)
+            .then(response => response.blob())
+            .then(blob => new File([blob], fileName, { type: mimeType }));
+        }   
+
+        for (let i = 0; i < profile_photos_old.length; i++) {
+
+            img_url = profile_photos_old[i].style['background-image']
+            const regex = /url\(['"]?(.*?)['"]?\)/;
+            const match = img_url.match(regex);
+            const url = match ? match[1] : null;
+            url_split = url.split('/')
+            file_name = url_split[url_split.length-1]
+            mime_type = mime_types_dict[file_name.split('.')[1]]
+
+            createFileFromUrl(url, file_name, mime_type)
+            .then(file => {
+                console.log('Создан объект File:', file);
+                profile_photos.push(file)
+            })
+            .catch(error => {
+                console.error('Ошибка при создании объекта File:', error);
+            });
+
+        }
+
+        // {% for image in profile.images.all %}
+        //     a = '{{image.image.file}}'
+        //     profile_photos.push('{{image.image.file}}')
+        // {% endfor %}
+
+    </script>
+    <script src="/static/js/edit_profile.js"></script>
+{% endblock %}

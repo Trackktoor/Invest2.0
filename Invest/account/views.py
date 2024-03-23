@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,resolve_url
 from .forms import SignupForm
 from .models import Profile
 from django.contrib.sites.shortcuts import get_current_site
@@ -8,19 +8,26 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str 
 from .token import account_activation_token
 from django.core.mail import EmailMessage 
-from .forms import ItemForm, SupportMailForm
 from account.models import Profile
 from django.contrib.auth import login
+from account.models import ProfileImage
+from django.http import JsonResponse
 from .forms import SignupForm
+from django.core.files.base import File
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetDoneView
-from .forms import SupportMailForm
-from django.core.mail import send_mail
-from django.urls import reverse
+from PIL import Image
+import hashlib
+from Invest.settings import BASE_DIR
+from invest_projects.models import Item
 
-# Create your views here.
 
-def Sugnup(request):
+def calculate_image_hash(image):
+    with Image.open(image) as img:
+        img_hash = hashlib.md5(img.tobytes()).hexdigest()
+    return img_hash
+
+
+def Signup(request):
     """
         Вьюшка для регистрации через почту
     """
@@ -33,7 +40,7 @@ def Sugnup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            user.username = '_'.join([request.POST['name'], str(user.pk)])
+            user.username = '_'.join([request.POST['username'], str(user.pk)])
             user.save()
             profile = Profile(
                 user=user,
@@ -60,11 +67,9 @@ def Sugnup(request):
             email.send()
             return render(request, 'account/signup_link_send.html')
         else:
-            return render(request, 'account/signup.html', {'form':form, 'errors':form.errors})
+            cleaned_data = form.cleaned_data
+            return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
-    if request.method == 'GET':
-        form = SignupForm()
-    return render(request, 'account/signup.html')
 
 def LogIn(request):
     if request.method == 'GET':
@@ -89,4 +94,82 @@ def activate(request, uidb64, token):
 def profile(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user=user)
-    return render(request, 'account/profile.html', {'profile':profile})
+    print(profile)
+    return render(request, 'account/profile.html', {'current_profile':profile})
+
+@login_required
+def edit_profile(request):
+    if request.method == 'GET':
+        return render(request, 'account/edit_profile.html')
+    
+    if request.method == 'POST':
+        print(request.POST)
+        profile_bd = Profile.objects.get(user=request.user)
+        if 'avatar' not in request.FILES.keys():
+            request.FILES['avatar'] = False 
+        avatar = request.FILES['avatar'] or profile_bd.avatar
+        if request.POST['username']:
+            username = request.POST['username']
+        else:
+            username = profile_bd.user.username
+
+        status = request.POST['status'] or profile_bd.profile_status
+        profile_info = request.POST['profile_info'].strip() or profile_bd.profile_info
+
+        # for profile_image in profile_bd.images.all():
+        #     for img_path in images_in_post:
+        #         img_path_post = img_path.replace('/', '\\')
+        #         img_path_bd = profile_image.image.path
+
+        #         if img_path_post in img_path_bd.replace('/', '\\'):
+        #             images_in_post.remove()
+        #             continue
+        #         else:
+        #             print(f"{img_path} not in {profile_image.image.path}")
+        #             profile_bd.images.remove(profile_image)
+        #             profile_image.delete()
+
+        # print(profile_bd.images.all())
+        # profile_bd.save()
+        # print(images_in_post)
+        # for photo_url in images_in_post:
+        #     full_path = os.path.join(BASE_DIR, photo_url[1:])
+        #     photos_content.append(full_path)
+        #     print('APPEND_POST')
+        if len(request.FILES.getlist('images')) == 0:
+            for img in profile_bd.images.all():
+                img.delete()
+        else:
+            for image in profile_bd.images.all():
+                image.delete()
+                
+            photos_content = []
+
+            for photo_file in request.FILES.getlist('images'):
+                    print('APPEND_FILES')
+                    photos_content.append(photo_file)
+            for image in photos_content:
+                img_bd = ProfileImage.objects.create(profile=profile_bd.id, image=image)
+                profile_bd.images.add(img_bd)
+                print('!!!!')
+
+        profile_bd.avatar = avatar
+        profile_bd.user.username = username
+        profile_bd.profile_status = status
+        profile_bd.profile_info = profile_info
+
+        profile_bd.save()
+        profile_bd.user.save()
+
+        data = {
+            'status': 200,
+            'reverse_url': resolve_url(profile, user_id=request.user.id)
+        }
+
+        return JsonResponse(data)
+
+@login_required
+def my_projects(request):
+    if request.method == 'GET':
+        projects = Item.objects.filter(user=request.user)
+        return render(request, 'account/my_projects.html', {'projects':projects})

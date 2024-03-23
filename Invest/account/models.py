@@ -30,7 +30,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_status = models.CharField(max_length=200, null=True, blank=True)
     interest = models.CharField(max_length=50)
-    avatar = models.ImageField(upload_to=save_image, blank=True, null=True)
+    avatar = models.ImageField(upload_to=save_image, blank=True, null=True, max_length=500)
     images = models.ManyToManyField('ProfileImage', related_name='images_for_profile')
     profile_info = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=20)
@@ -57,6 +57,7 @@ class Profile(models.Model):
         # pylint: enable=all
 
 def save_image(instance, filename):
+    print(f'FILENAME: {filename}')
     try:
         return '/'.join([settings.MEDIA_ROOT,'profile_images', str(instance.item_id), filename])
     except:
@@ -64,4 +65,4 @@ def save_image(instance, filename):
 
 class ProfileImage(models.Model):
     profile = models.IntegerField(default=-1)
-    image = models.ImageField(upload_to=save_image, blank=True, null=True)
+    image = models.ImageField(upload_to=save_image, blank=True, null=True, max_length=500)
