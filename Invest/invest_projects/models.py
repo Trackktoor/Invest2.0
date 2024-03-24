@@ -46,7 +46,7 @@ class Item(models.Model):
     count_view = models.IntegerField(default=0)
     count_get_contacts = models.IntegerField(default=0)
     count_add_favorite = models.ManyToManyField(
-        User, related_name='favorite_items', blank=True, null=True)
+        User, related_name='favorite_items', blank=True)
     status = models.CharField(max_length=100, default='Проверяется')
     paid_verification = models.BooleanField(default=False)
     author_job_title = models.CharField(max_length=200, default='Директор')
@@ -57,10 +57,6 @@ class Item(models.Model):
     def get_count_add_favorite(self):
         return len(self.count_add_favorite.all())
     
-    
-
-
-
 
 class ItemImage(models.Model):
     """

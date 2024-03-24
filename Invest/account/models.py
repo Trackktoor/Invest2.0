@@ -5,6 +5,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils import timezone
 from invest_projects.models import Item
 from datetime import datetime
 from datetime import timedelta
@@ -35,12 +36,12 @@ class Profile(models.Model):
     profile_info = models.TextField(blank=True, null=True)
     phone_number = models.CharField(max_length=20)
     phone_verified = models.BooleanField(default=False)
-    favorites = models.ManyToManyField(Item, blank=True, null=True)
+    favorites = models.ManyToManyField(Item, blank=True)
     snils = models.ImageField(upload_to=save_image, blank=True, null=True)
     passport = models.ImageField(upload_to=save_image, blank=True, null=True)
     ogrn = models.ImageField(upload_to=save_image, blank=True, null=True)
     inn = models.ImageField(upload_to=save_image, blank=True, null=True)
-    last_acivity = models.DateTimeField(default=datetime.now())
+    last_acivity = models.DateTimeField(default=timezone.now)
 
     def user_is_online(self):
         past_time_with_timezone = (
