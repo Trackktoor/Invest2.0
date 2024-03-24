@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render,redirect,resolve_url
-from .forms import SignupForm
-from .models import Profile
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string 
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
@@ -11,14 +9,17 @@ from django.core.mail import EmailMessage
 from account.models import Profile
 from django.contrib.auth import login
 from account.models import ProfileImage
-from django.http import JsonResponse
-from .forms import SignupForm
+from django.http import JsonResponse, HttpRequest, HttpResponse
+from .forms import SignupForm, SignIn
 from django.core.files.base import File
 from django.contrib.auth.decorators import login_required
 from PIL import Image
 import hashlib
 from Invest.settings import BASE_DIR
 from invest_projects.models import Item
+
+from .forms import SignupForm, SignIn
+from .models import Profile
 
 
 def calculate_image_hash(image):
@@ -27,7 +28,7 @@ def calculate_image_hash(image):
     return img_hash
 
 
-def Signup(request):
+def Signup(request: HttpRequest) -> HttpResponse:
     """
         Вьюшка для регистрации через почту
     """
@@ -71,9 +72,26 @@ def Signup(request):
             return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
 
-def LogIn(request):
+def LogIn(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         return render(request, 'account/login.html')
+    if request.method == 'POST':
+        form = SignIn(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+        else:
+            cleaned_data = form.cleaned_data
+            return render(
+                request=request,
+                template_name='account.login.html',
+                context={
+                    "form": form,
+                    "cleaned_data": cleaned_data,
+                    "errors": form.errors,                    
+                }
+            )
+            
+            
     
 def activate(request, uidb64, token):
     try:

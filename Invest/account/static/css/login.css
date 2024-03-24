@@ -90,3 +90,21 @@
         width: 68%;
     }
 }
+
+
+.input_container_error {
+    background-color: #FFB7B7;
+    font-size: 25px;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input_container_error .signup_input{
+    color:  black;
+    background-color: #FFB7B7;
+}

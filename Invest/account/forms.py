@@ -120,3 +120,33 @@ class SignupForm(forms.ModelForm):
         else:
             return cdata["password2"]
     
+
+class SignIn(forms.ModelForm):
+    email = forms.EmailField(
+        max_length=50,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле"
+        }
+    )
+    password = forms.CharField(
+        max_length=32,
+        min_length=5,
+        required=True,
+        error_messages={
+            "required": "Обязательное поле",
+            "min_length": "Минимум 5 знаков",
+        }
+    )
+    
+    def clean_email(self):
+        try:
+            validate_email(self.cleaned_data["email"])
+        except ValidationError:
+            raise forms.ValidationError("Укажите корректную почту")
+        if User.objects.filter(email=self.cleaned_data["email"]).exists():
+            raise forms.ValidationError("Почта не зарегистрирована")
+        return self.cleaned_data["email"]
+    
+    
+    
