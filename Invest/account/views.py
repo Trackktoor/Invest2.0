@@ -83,7 +83,7 @@ def LogIn(request: HttpRequest) -> HttpResponse:
             cleaned_data = form.cleaned_data
             return render(
                 request=request,
-                template_name='account.login.html',
+                template_name='account/login.html',
                 context={
                     "form": form,
                     "cleaned_data": cleaned_data,

@@ -138,6 +138,13 @@ class SignIn(forms.ModelForm):
             "min_length": "Минимум 5 знаков",
         }
     )
+
+    class Meta:
+        """
+            Конфигурация формы
+        """
+        model = User
+        fields = ("email",)
     
     def clean_email(self):
         try:

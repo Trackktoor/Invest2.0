@@ -5,7 +5,8 @@ from . import views_ajax
 
 urlpatterns = [
     path('', views.Signup, name='signup'),
-    path('login/', LoginView.as_view(template_name='account/login.html'), name='login'),
+    # path('login/', LoginView.as_view(template_name='account/login.html'), name='login'),
+    path('login/', view=views.LogIn, name='login'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'), 
     path('<int:user_id>', views.profile, name='profile'),
     path('logout/', LogoutView.as_view(template_name='account/logout.html'), name='logout'),
