@@ -17,6 +17,7 @@ from PIL import Image
 import hashlib
 from Invest.settings import BASE_DIR
 from invest_projects.models import Item
+from django.contrib.auth import authenticate
 
 from .forms import SignupForm, SignIn
 from .models import Profile
@@ -78,8 +79,24 @@ def LogIn(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = SignIn(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            user = User.objects.get(email=form.cleaned_data['email'])
+            print(form.cleaned_data)
+            if user.check_password(form.cleaned_data['password']):
+                authenticate(username=user.username, password=form.cleaned_data['password'])
+                login(request, user)
+                return redirect('all_projects')
+            
+            return render(
+                request=request,
+                template_name='account/login.html',
+                context={
+                    "form": form,
+                    "cleaned_data": form.cleaned_data,
+                    "errors": 'Неправельные данные',
+                }
+            )
         else:
+            print(form.errors)
             cleaned_data = form.cleaned_data
             return render(
                 request=request,
