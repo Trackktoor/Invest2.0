@@ -114,6 +114,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'account.auth.EmailAuthBackend', # Путь к вашему пользовательскому бэкенду
+    'django.contrib.auth.backends.ModelBackend', # Встроенный бэкенд Django
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

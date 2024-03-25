@@ -151,7 +151,7 @@ class SignIn(forms.ModelForm):
             validate_email(self.cleaned_data["email"])
         except ValidationError:
             raise forms.ValidationError("Укажите корректную почту")
-        if User.objects.filter(email=self.cleaned_data["email"]).exists():
+        if not User.objects.filter(email=self.cleaned_data["email"]).exists():
             raise forms.ValidationError("Почта не зарегистрирована")
         return self.cleaned_data["email"]
     
