@@ -79,7 +79,7 @@ class SignupForm(forms.ModelForm):
             Конфигурация формы
         """
         model = User
-        fields = ("username", "email",)
+        fields = ("username", "email", "password")
 
 
     def clean_username(self):
@@ -110,16 +110,6 @@ class SignupForm(forms.ModelForm):
             raise ValidationError("Неверный номер телефона")
         return self.cleaned_data['phone']
     
-    
-    def clean_password2(self):
-        cdata = self.cleaned_data
-        if "password" not in cdata:
-            raise forms.ValidationError("Минимум 5 знаков")
-        if cdata["password"] != cdata["password2"]:
-            raise forms.ValidationError("Пароли не совпадают")
-        else:
-            return cdata["password2"]
-    
 
 class SignIn(forms.ModelForm):
     email = forms.EmailField(
@@ -144,16 +134,9 @@ class SignIn(forms.ModelForm):
             Конфигурация формы
         """
         model = User
-        fields = ("email",)
-    
-    def clean_email(self):
-        try:
-            validate_email(self.cleaned_data["email"])
-        except ValidationError:
-            raise forms.ValidationError("Укажите корректную почту")
-        if not User.objects.filter(email=self.cleaned_data["email"]).exists():
-            raise forms.ValidationError("Почта не зарегистрирована")
-        return self.cleaned_data["email"]
+        fields = ("email", "password")
+
+        
     
     
     

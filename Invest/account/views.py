@@ -78,23 +78,14 @@ def LogIn(request: HttpRequest) -> HttpResponse:
         return render(request, 'account/login.html')
     if request.method == 'POST':
         form = SignIn(request.POST)
+        email = form.email
         if form.is_valid():
-            user = User.objects.get(email=form.cleaned_data['email'])
+            user = authenticate(email=form.email, password=form.password)
             print(form.cleaned_data)
-            if user.check_password(form.cleaned_data['password']):
-                authenticate(username=user.username, password=form.cleaned_data['password'])
+            if user is not None:
                 login(request, user)
                 return redirect('all_projects')
             
-            return render(
-                request=request,
-                template_name='account/login.html',
-                context={
-                    "form": form,
-                    "cleaned_data": form.cleaned_data,
-                    "errors": 'Неправельные данные',
-                }
-            )
         else:
             print(form.errors)
             cleaned_data = form.cleaned_data
