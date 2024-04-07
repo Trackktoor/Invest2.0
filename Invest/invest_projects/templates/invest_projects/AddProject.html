@@ -8,7 +8,7 @@
 {% block title %}
     StarInvest - Создать объявление
 {% endblock %}
-    
+
 {% block content %}
 <form method="POST" class="project_container" enctype="multipart/form-data">
     {% csrf_token %}
@@ -97,7 +97,7 @@
                 <input type="text" placeholder="Должность" name="author_job_title" id="author_job_title">
             </div>
             <div class="input_author_info">
-                <input type="text" placeholder="Номер телефона" name="author_phone_number" id="author_phone_number">
+                <input type="text" placeholder="+79998887766" name="author_phone_number" id="author_phone_number">
             </div>
         </div>
     </div>

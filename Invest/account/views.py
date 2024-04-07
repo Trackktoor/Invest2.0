@@ -13,6 +13,7 @@ from django.http import JsonResponse, HttpRequest, HttpResponse
 from .forms import SignupForm, SignIn
 from django.core.files.base import File
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from PIL import Image
 import hashlib
 from Invest.settings import BASE_DIR
@@ -68,8 +69,10 @@ def Signup(request: HttpRequest) -> HttpResponse:
             )
             email.send()
             return render(request, 'account/signup_link_send.html')
+
         else:
             cleaned_data = form.cleaned_data
+            print(form.errors)
             return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
 
@@ -81,7 +84,7 @@ def LogIn(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             user = User.objects.get(email=form.cleaned_data['email'])
             print(form.cleaned_data)
-            if user.check_password(form.cleaned_data['password']):
+            if check_password(form.cleaned_data['password'], user.password):
                 authenticate(username=user.username, password=form.cleaned_data['password'])
                 login(request, user)
                 return redirect('all_projects')
@@ -92,7 +95,7 @@ def LogIn(request: HttpRequest) -> HttpResponse:
                 context={
                     "form": form,
                     "cleaned_data": form.cleaned_data,
-                    "errors": 'Неправельные данные',
+                    "errors": 'Неправильные данные',
                 }
             )
         else:
@@ -104,12 +107,10 @@ def LogIn(request: HttpRequest) -> HttpResponse:
                 context={
                     "form": form,
                     "cleaned_data": cleaned_data,
-                    "errors": form.errors,                    
+                    "errors": 'Неправильные данные',                    
                 }
             )
             
-            
-    
 def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -131,6 +132,7 @@ def profile(request, user_id):
     profile = Profile.objects.get(user=user)
     print(profile)
     return render(request, 'account/profile.html', {'current_profile':profile})
+
 
 @login_required
 def edit_profile(request):

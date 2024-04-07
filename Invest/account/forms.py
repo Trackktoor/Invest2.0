@@ -1,11 +1,13 @@
 from typing import Any
 import phonenumbers
 
+from django.contrib.auth.hashers import check_password
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Item
 from django.core.validators import validate_email
+from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
 
@@ -24,7 +26,7 @@ class ItemForm(forms.ModelForm):
                   'required_investment', 'profit_per_month', 'user', 'category']
 
 
-class SignupForm(forms.ModelForm):
+class SignupForm(UserCreationForm):
     """
         Форма для регистрацию через почту
     """
@@ -56,7 +58,7 @@ class SignupForm(forms.ModelForm):
         choices=[('investing', 'Инвестиции'),
                  ('project', 'Привлечение денег в свои проекты')]
     )
-    password = forms.CharField(
+    password1 = forms.CharField(
         max_length=32,
         min_length=5,
         required=True,
@@ -73,13 +75,12 @@ class SignupForm(forms.ModelForm):
         })
     )
     
-    
     class Meta:
         """
             Конфигурация формы
         """
         model = User
-        fields = ("username", "email",)
+        fields = ("username", "email", "password1", "password2",)
 
 
     def clean_username(self):
@@ -113,13 +114,14 @@ class SignupForm(forms.ModelForm):
     
     def clean_password2(self):
         cdata = self.cleaned_data
-        if "password" not in cdata:
+        print(cdata)
+        if "password2" not in cdata:
             raise forms.ValidationError("Минимум 5 знаков")
-        if cdata["password"] != cdata["password2"]:
+        if cdata["password1"] != cdata["password2"]:
             raise forms.ValidationError("Пароли не совпадают")
         else:
             return cdata["password2"]
-    
+        
 
 class SignIn(forms.ModelForm):
     email = forms.EmailField(
@@ -152,8 +154,5 @@ class SignIn(forms.ModelForm):
         except ValidationError:
             raise forms.ValidationError("Укажите корректную почту")
         if not User.objects.filter(email=self.cleaned_data["email"]).exists():
-            raise forms.ValidationError("Почта не зарегистрирована")
+            raise forms.ValidationError("Неправильные данные")
         return self.cleaned_data["email"]
-    
-    
-    

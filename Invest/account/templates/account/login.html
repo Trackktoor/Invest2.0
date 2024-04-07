@@ -14,15 +14,15 @@
         <form method="POST">
             {% csrf_token %}
             <div class="login_input_container">
-                <div class="{% if form.email.errors or errors %}input_container_error{% else %}input_container{% endif %}">
+                <div class="{% if form.email.errors or form.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
-                    <input name="email" class="login_input" placeholder="{% if form.email.errors %}{{ form.email.errors|join:', ' }}{%  else %} {% if errors %} {{ errors }} {% else %} Почта{% endif %}{% endif %}" type="text">
+                    <input name="email" class="login_input" placeholder="{% if form.email.errors %}{{ form.email.errors|join:', ' }}{%  else %} {% if errors %}{{ errors }}{% else %}Почта{% endif %}{% endif %}" type="text">
                 </div>
             </div>
             <div class="login_input_container">
-                <div class="{% if form.email.errors or errors %}input_container_error{% else %}input_container{% endif %}">
+                <div class="{% if form.password.errors or form.errors %}input_container_error{% else %}input_container{% endif %}">
                     <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
-                    <input name="password" class="login_input" placeholder="{% if form.email.errors %}{{ form.password.errors|join:', ' }}{%  else %} {% if errors %} {{ errors }} {% else %} Пароль  {% endif %}{% endif %}" type="password">
+                    <input name="password" class="login_input" placeholder="{% if form.password.errors %}{{ form.password.errors|join:', ' }}{%  else %}{% if errors %}{{ errors }}{% else %}Пароль{% endif %}{% endif %}" type="password">
                 </div>
             </div>
             <div class="container_button">

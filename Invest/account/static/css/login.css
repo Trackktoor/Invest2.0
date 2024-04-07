@@ -49,10 +49,12 @@ div.input_container_error {
     background-color: #FFB7B7;
 }
 
+.login_input_container > input::placeholder {
+    text-align: left;
+}
 
 .input_container_error > img {
     width: 35px;
-    height: 35px;
     margin-right: 15px;
   }
 

@@ -19,7 +19,6 @@ def projects_map(project):
     project_dict['images_urls'] = images_urls
     return project_dict
 
-
 def GetAllInvestProjects(request):
     if "HTTP_X_REQUESTED_WITH" in request.META and request.META["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest":
         categories = request.GET.getlist('categories[]')
