@@ -130,7 +130,7 @@ def activate(request, uidb64, token):
 def profile(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user=user)
-    print(profile)
+    profile.user.username = profile.user.username.split('_')[0]
     return render(request, 'account/profile.html', {'current_profile':profile})
 
 

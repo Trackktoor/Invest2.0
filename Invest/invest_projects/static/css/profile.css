@@ -166,3 +166,27 @@ h2 {
         margin-top: 10px;
     }
 }
+
+@media(max-width: 420px) {
+    .profile_photos {
+        padding: 18px;
+        margin-top: 25px;
+    }
+    .avatar_container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        margin-bottom: 15px;
+    }
+    .avatar_img {
+        width: 160px;
+        height: 160px;
+    }
+    .main_info {
+        padding: 15px;
+    }
+    .avatar_img {
+        margin-right: 0;
+    }
+}

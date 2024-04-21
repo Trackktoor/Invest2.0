@@ -56,6 +56,7 @@ function delete_photo_profile(ev){
 
 document.getElementById('profile_photos-input').addEventListener('change', addPhotoInProfile)
 document.getElementById('avatar').addEventListener('change', displaySelectedPhoto)
+document.getElementById('profile_info_input').value = ''
 
 photo_items_a__delete_images = document.getElementsByClassName('delete_image__icon')
 
@@ -73,6 +74,7 @@ document.getElementById('form_submit').addEventListener('click', function(e){
   let username = document.getElementById('username').value
   let status = document.getElementById('status').value
   let profile_info = document.getElementById('profile_info_input').value
+  console.log(profile_info)
 
   let csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value
 
