@@ -15,7 +15,9 @@ class EmailAuthBackend(ModelBackend):
 
         try:
             user = User.objects.get(**kwargs)
+            print(user)
             if user.check_password(password):
+                print('e')
                 return user
             else:
                 return None

@@ -12,8 +12,10 @@ class LastActivityUpdateMiddleware:
         response = self.get_response(request)
 
         if request.user.is_authenticated:
-            profile = Profile.objects.get(user=request.user)
-            profile.last_acivity = datetime.now().replace(tzinfo=pytz.UTC)
-            profile.save()
-
+            try:
+                profile = Profile.objects.get(user=request.user)
+                profile.last_acivity = datetime.now().replace(tzinfo=pytz.UTC)
+                profile.save()
+            except:
+                pass
         return response

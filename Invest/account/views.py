@@ -11,12 +11,10 @@ from django.contrib.auth import login
 from account.models import ProfileImage
 from django.http import JsonResponse, HttpRequest, HttpResponse
 from .forms import SignupForm, SignIn
-from django.core.files.base import File
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from PIL import Image
 import hashlib
-from Invest.settings import BASE_DIR
 from invest_projects.models import Item
 from django.contrib.auth import authenticate
 
@@ -42,11 +40,13 @@ def Signup(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
+            user.set_password(request.POST['password1'])
             user.save()
-            user.username = '_'.join([request.POST['username'], str(user.pk)])
+            user.username = request.POST['email']
             user.save()
             profile = Profile(
                 user=user,
+                username=request.POST['username'],
                 phone_number=request.POST['phone'],
                 interest=request.POST['interest']
             )
@@ -84,7 +84,7 @@ def LogIn(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             user = User.objects.get(email=form.cleaned_data['email'])
             print(form.cleaned_data)
-            if check_password(form.cleaned_data['password'], user.password):
+            if user.check_password(form.cleaned_data['password']):
                 authenticate(username=user.username, password=form.cleaned_data['password'])
                 login(request, user)
                 return redirect('all_projects')
@@ -110,7 +110,7 @@ def LogIn(request: HttpRequest) -> HttpResponse:
                     "errors": 'Неправильные данные',                    
                 }
             )
-            
+
 def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -120,9 +120,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        Profile.objects.get(user=user).save()
-        user.backend = 'django.contrib.auth.backends.ModelBackend'
-        login(request, user)
+        login(request, User.objects.get(pk=uid))
         return redirect('all_projects')
     else:
         return render(request, 'account/signup_link_error.html')

@@ -19,7 +19,7 @@
                     <img src="{{ current_profile.avatar.url }}" alt="" class="avatar_img">
                 {% endif %}
                 <div class="avatar_info">
-                    <h2>{{current_profile.user.username}}</h2>
+                    <h2>{{current_profile.username}}</h2>
                     {% if current_profile.profile_status != None %}
                     {{current_profile.profile_status}}
                     {% else %}
@@ -47,7 +47,11 @@
             <div class="profile_description">
                 О себе
                 <div class="profile_description_text">
-                        {{current_profile.profile_info}}
+                        {% if current_profile.profile_info != None  %}
+                            {{current_profile.profile_info}}
+                        {% else %}
+                            Здесь пока пусто..
+                        {% endif %}
                 </div>
             </div>
         </div>

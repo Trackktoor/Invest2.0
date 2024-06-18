@@ -11,7 +11,7 @@ def AllInvestProjects(request):
     if request.method == 'GET':
         categories = Category.objects.all()
         return render(request, 'invest_projects/AllInvestProjects.html', {'categories':categories})
-    
+
 def Project(request,project_id):
     if request.method == 'GET':
         try:

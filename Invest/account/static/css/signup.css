@@ -43,6 +43,7 @@
     padding: 15px;
     display: flex;
     flex-direction: row;
+    border: 1px solid black;
     align-items: center;
 }
 
@@ -141,17 +142,21 @@
 @media(max-device-width: 1280px) {
     .signup_container {
         width: 45%;
+        font-size: 15px;
     }
 }
 
 @media(max-device-width: 856px) {
     .signup_container {
         width: 45%;
+        font-size: 15px;
     }
 }
+
 @media(max-device-width: 559px) {
     .signup_container {
         width: 45%;
+        font-size: 15px;
     }
 }
 

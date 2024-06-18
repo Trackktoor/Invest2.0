@@ -1,6 +1,5 @@
-from typing import Any
 import phonenumbers
-
+from django.db import transaction
 from django.contrib.auth.hashers import check_password
 from django import forms
 from django.contrib.auth.models import User
@@ -122,7 +121,7 @@ class SignupForm(UserCreationForm):
         else:
             return cdata["password2"]
         
-
+    
 class SignIn(forms.ModelForm):
     email = forms.EmailField(
         max_length=50,
