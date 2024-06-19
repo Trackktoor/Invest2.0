@@ -1,20 +1,20 @@
 document.getElementById('avatar-input').addEventListener('change', previewAvatar)
 document.getElementById('header_background-input').addEventListener('change', previewHeaderBackground)
-document.getElementById('slider_photos-input').addEventListener('change', addSlide)
-document.getElementById('delete_slide').addEventListener('click', deleteSlide)
+// document.getElementById('slider_photos-input').addEventListener('change', addSlide)
+// document.getElementById('delete_slide').addEventListener('click', deleteSlide)
 
 /* Зависимости для слайдера */
 // Получаем элементы слайдера
-const slider = document.querySelector('.slider');
-const prevButton = document.querySelector('.back');
-const nextButton = document.querySelector('.next');
-const imageInput = document.getElementById('slider_photos-input')
+// const slider = document.querySelector('.slider');
+// const prevButton = document.querySelector('.back');
+// const nextButton = document.querySelector('.next');
+// const imageInput = document.getElementById('slider_photos-input')
 
 let form = document.getElementsByClassName('project_container')[0]
 
-let sliders_arr = []
+// let sliders_arr = []
 
-let slideIndex = 0;
+// let slideIndex = 0;
 
 function previewAvatar(event) {
     var input = event.target;
@@ -73,34 +73,34 @@ function deleteSlide() {
   slide()
 }
 
-/* Логика слайдера */
-nextButton.addEventListener('click', function() {
-  let slides = Array.from(slider.querySelectorAll('img'));
-  let slides_length = slides.length
-    if (slideIndex < slides_length-1){
-        slideIndex++
-    }
-    else{
-        slideIndex = 0
-    }
+// /* Логика слайдера */
+// nextButton.addEventListener('click', function() {
+//   let slides = Array.from(slider.querySelectorAll('img'));
+//   let slides_length = slides.length
+//     if (slideIndex < slides_length-1){
+//         slideIndex++
+//     }
+//     else{
+//         slideIndex = 0
+//     }
 
-    slide()
-})
+//     slide()
+// })
 
-prevButton.addEventListener('click', function() {
-    if (slideIndex != 0){
-        slideIndex--
-    }
-    else {
-        slideIndex = 0
-    }
-    slide()
+// prevButton.addEventListener('click', function() {
+//     if (slideIndex != 0){
+//         slideIndex--
+//     }
+//     else {
+//         slideIndex = 0
+//     }
+//     slide()
 
-})
+// })
 
-function slide(){
-  slider.style.transform = `translateX(-${slider.offsetWidth * slideIndex}px)`;
-}
+// function slide(){
+//   slider.style.transform = `translateX(-${slider.offsetWidth * slideIndex}px)`;
+// }
 
 let project_main_info =  document.getElementsByClassName('project_main_info')[0]
 

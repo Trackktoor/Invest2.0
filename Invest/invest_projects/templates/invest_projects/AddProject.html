@@ -56,22 +56,16 @@
     </div>
     <div class="project_body">
         <div class="project_main_info">
-            <div class="slider_container">
-                <span class="slider_nav_element next">&gt;</span>
-                <span class="slider_nav_element back">&lt;</span>
-                <label id="slider_photos-label" for="slider_photos-input">
-                    <div class="avatar-preview">
-                      <span class="avatar-label">Добавить слайд</span>
-                      <img id="avatar-image" src="#" />
-                    </div>
-                  </label>
-                <div id="delete_slide">
-                    Удалить слайд
-                </div>
             <div class="slider">
-                <input type="file" id="slider_photos-input" name="slider_photos" multiple >
+                <button id="prev" class="nav-btn">&#60;</button>
+                <div id="slides-container" class="slides-container">
+                    <!-- Слайды будут добавляться динамически -->
+                </div>
+                <button id="next" class="nav-btn">&#62;</button>
+                <button id="addSlide" class="action-btn add-btn">Добавить слайд</button>
+                <button id="removeSlide" class="action-btn remove-btn">Удалить слайд</button>
             </div>
-            </div>
+            <input type="file" id="fileInput" class="file-input" accept="image/*">
             <div class="main_info_text">
                 {{ project.description }}
             </div>
@@ -110,4 +104,5 @@
     <input id="form_submit" type="submit" value="Загрузить">
 </form>
 <script src="/static/js/AddProjectScripts.js"></script>
+<script src="/static/js/SliderScript.js"></script>
 {% endblock %}
