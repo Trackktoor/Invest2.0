@@ -75,7 +75,6 @@ def Signup(request: HttpRequest) -> HttpResponse:
             print(form.errors)
             return render(request, 'account/signup.html', {'form':form, "cleaned_data": cleaned_data, 'errors':form.errors})
 
-
 def LogIn(request: HttpRequest) -> HttpResponse:
     if request.method == 'GET':
         return render(request, 'account/login.html')
@@ -184,7 +183,7 @@ def edit_profile(request):
                     print('APPEND_FILES')
                     photos_content.append(photo_file)
             for image in photos_content:
-                img_bd = ProfileImage.objects.create(profile=profile_bd.id, image=image)
+                img_bd = ProfileImage.objects.create(profile=profile_bd, image=image)
                 profile_bd.images.add(img_bd)
                 print('!!!!')
 

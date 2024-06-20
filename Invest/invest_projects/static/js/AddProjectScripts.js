@@ -163,6 +163,9 @@ document.getElementById('form_submit').addEventListener('click', function(e){
   for (let i=0; i < sliders_arr.length; i++) {
     form.append('images', sliders_arr[i])
   }
+  for (let pair of form.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]);
+  }
   form.append('background_image', background_image.files[0])
 
   form.append('required_investment', required_invest)

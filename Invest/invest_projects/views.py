@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, resolve_url
 from .models import Item, Category, ItemImage
 from django.http import JsonResponse
 from account.models import Profile
+from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from account.models import Profile
 
@@ -23,6 +24,7 @@ def Project(request,project_id):
             return HttpResponse('<h1 styles="text-align=center">404 Not Found</h1>')
 
 @login_required
+@transaction.atomic
 def AddProject(request):
     if request.method == 'GET':
         profile = Profile.objects.get(user=request.user)
@@ -30,7 +32,6 @@ def AddProject(request):
         return render(request, 'invest_projects/AddProject.html', {'profile':profile, 'categories':categories})
     
     if request.method == 'POST':
-        print(request.POST)
         title = request.POST['title']
         description = request.POST['description']
         city = request.POST['city']
@@ -38,7 +39,6 @@ def AddProject(request):
         profit_per_month = request.POST['profit_per_month']
         profit_parametr = request.POST['profit_parametr']
         category = Category.objects.first()
-        # Создать здесь картинки
         background_image = request.FILES['background_image']
         project_avatar = request.FILES['project_avatar']
         contacts = request.POST['contacts']
@@ -64,16 +64,19 @@ def AddProject(request):
         
         project.background_image = background_image
         project.project_avatar = project_avatar
-        
+        print(len(request.FILES.getlist('images')))
         for photo in request.FILES.getlist('images'):
+            print(len(request.FILES.getlist('images')))
             new_image = ItemImage(item_id=project.id, image=photo)
             new_image.save()
             project.images.add(new_image)
+
         project.save()
 
         data = {
             'status': 200,
-            'reverse_url': resolve_url(Project, project_id=project.id)
+            'reverse_url': resolve_url(AllInvestProjects)
+            # 'reverse_url': resolve_url(Project, project_id=project.id)
         }
 
         return JsonResponse(data)

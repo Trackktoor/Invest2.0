@@ -8,30 +8,30 @@ const slides_length = slides.length
 let slideIndex = 0;
 
 
-nextButton.addEventListener('click', function() {
-    if (slideIndex < slides_length-1){
-        slideIndex++
-    }
-    else{
-        slideIndex = 0
-    }
+// nextButton.addEventListener('click', function() {
+//     if (slideIndex < slides_length-1){
+//         slideIndex++
+//     }
+//     else{
+//         slideIndex = 0
+//     }
 
-    slide()
-})
+//     slide()
+// })
 
-prevButton.addEventListener('click', function() {
-    if (slideIndex != 0){
-        slideIndex--
-    }
-    else {
-        slideIndex = 0
-    }
-    slide()
+// prevButton.addEventListener('click', function() {
+//     if (slideIndex != 0){
+//         slideIndex--
+//     }
+//     else {
+//         slideIndex = 0
+//     }
+//     slide()
 
-})
+// })
 
-function slide(){
-    console.log(slideIndex)
+// function slide(){
+//     console.log(slideIndex)
     
-    slider.style.transform = `translateX(-${slider.offsetWidth * slideIndex}px)`;
-}
+//     slider.style.transform = `translateX(-${slider.offsetWidth * slideIndex}px)`;
+// }

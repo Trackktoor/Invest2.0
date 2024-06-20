@@ -2,6 +2,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="/static/css/project_styles.css">
+    <link rel="stylesheet" href="/static/css/project_styles_2.css">
 {% endblock %}
 
 {% block title %}
@@ -36,7 +37,18 @@
         </div>
         <div class="project_body">
             <div class="project_main_info">
-                <div class="slider_container">
+                <div class="slider">
+                    <button id="prev" class="nav-btn">&#60;</button>
+                    <div id="slides-container" class="slides-container">
+                        {% for image in project.images.all %}
+                            <div class="slide">
+                                <img src="{{image.image.url}}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button id="next" class="nav-btn">&#62;</button>
+                </div>
+                <!-- <div class="slider_container">
                     <span class="slider_nav_element next">&gt;</span>
                     <span class="slider_nav_element back">&lt;</span>
                     <div class="slider">
@@ -46,7 +58,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                </div>
+                </div> -->
                 <div class="main_info_text">
                     {{ project.description }}
                 </div>
@@ -70,4 +82,5 @@
         </div>
     </div>
     <script src="/static/js/project_scripts.js"></script>
+    <script src="/static/js/SliderScript.js"></script>
 {% endblock %}

@@ -1,0 +1,12 @@
+.project_body,.project_main_info,.slider {
+    height: fit-content;
+}
+
+.slider {
+    background-color: white;
+    box-shadow: none;
+}
+
+.main_info_text {
+    word-break: break-all;
+}
