@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='account/logout.html'), name='logout'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('my_projects/', views.my_projects, name='my_projects'),
-    path('ajax/', include('account.urls_ajax'),)
+    path('ajax/', include('account.urls_ajax'),),
+    path('chat/', views.chat, name='chat'),
 ]

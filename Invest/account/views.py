@@ -27,7 +27,6 @@ def calculate_image_hash(image):
         img_hash = hashlib.md5(img.tobytes()).hexdigest()
     return img_hash
 
-
 def Signup(request: HttpRequest) -> HttpResponse:
     """
         Вьюшка для регистрации через почту
@@ -130,7 +129,6 @@ def profile(request, user_id):
     profile.user.username = profile.user.username.split('_')[0]
     return render(request, 'account/profile.html', {'current_profile':profile})
 
-
 @login_required
 def edit_profile(request):
     if request.method == 'GET':
@@ -207,3 +205,7 @@ def my_projects(request):
     if request.method == 'GET':
         projects = Item.objects.filter(user=request.user)
         return render(request, 'account/my_projects.html', {'projects':projects})
+    
+def chat(request):
+    if request.method == 'GET':
+        return render(request, 'account/chat.html')

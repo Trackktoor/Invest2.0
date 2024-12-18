@@ -3,6 +3,9 @@ venv
 __pycache__
 *.pyc
 *.docx#
+db.sqlite3
+*.rar
+
 
 ### OSX ###
 .DS_Store

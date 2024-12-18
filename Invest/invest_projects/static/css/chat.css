@@ -1,0 +1,115 @@
+.main_info {
+    padding: 0;
+}
+
+.contacts_item_img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position-x: 50%;
+    margin-right: 10px;
+}
+
+.chat_container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+    min-height: 82vh;
+}
+
+.chat_contacts {
+    width: 20%;
+    background-color: #C0C0C0;
+
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 15px;
+}
+
+.chat_messages {
+    width: 80%;
+    background-color: #BCC7FF;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat_messages_header, .form_send_message {
+    background-color: #E6E5E5;
+}
+
+.chat_messages_header {
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+
+.chat_contacts_item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.chat_history {
+    height: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipient {
+    align-self: flex-end;
+}
+
+.send_message_input {
+    border: 0;
+    background: inherit;
+    height: calc(100% - 4px);
+    margin: 0;
+    padding: 2px;
+    width: 96%;
+    font-size: 18px;
+}
+
+.message {
+    width: fit-content;
+    background: white;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+}
+
+.form_send_message {
+    display: flex;
+}
+
+.send_message_img:hover {
+    cursor: pointer;
+}
+
+@media(max-device-width: 915px) {
+    .chat_contacts {
+        padding: 13px;
+    }
+    .chat_contacts_item {
+        padding: 2px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .contacts_item_img {
+        margin-right: 0;
+    }
+}

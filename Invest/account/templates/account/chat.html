@@ -10,5 +10,30 @@
 {% endblock %}
     
 {% block content_account %}
-    
+    <div class="chat_container">
+        <div class="chat_contacts">
+            <a href="#" class="chat_contacts_item">
+                <div class="contacts_item_img" style="background-image: url(/static/img/AVA.jpeg);"></div>
+                Сергей
+            </a>
+            <a href="#" class="chat_contacts_item">
+                <div class="contacts_item_img" style="background-image: url(/static/img/AVA.jpeg);"></div>
+                Сергей
+            </a>
+        </div>
+        <div class="chat_messages">
+            <div class="chat_messages_header">
+                <div class="contacts_item_img" style="background-image: url(/static/img/AVA.jpeg);"></div>
+                <span>Сергей</span>
+            </div>
+            <div class="chat_history">
+                <div class="message sender">Привет!</div>
+                <div class="message recipient">Привет!</div>
+            </div>
+            <div class="form_send_message">
+                <input type="text" class="send_message_input">
+                <img src="/static/img/send_message.svg" alt="" class="send_message_img">
+            </div>
+        </div>
+    </div>
 {% endblock %}
