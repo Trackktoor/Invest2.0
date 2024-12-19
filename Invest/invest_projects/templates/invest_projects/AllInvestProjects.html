@@ -11,11 +11,25 @@
 {% block content %}
 <div class="container">
     <div class="title">
+        <a href="#" class="button_back">
+            <img src="/static/img/arrow_back.svg" alt=""> Назад
+        </a>
         <h2>Главная</h2>
     </div>
     <div class="search">
-        <input placeholder="Поиск..." type="text">
-        <img src="/static/img/search_icon.svg"  alt="">
+        <div class="search_input_container">
+            <input placeholder="Поиск" type="text">
+            <div class="search_img_container">
+                <img src="/static/img/search_icon.svg"  alt="">
+            </div>
+        </div>
+        <a href="#" class="add_project_button">
+            Добавить свой проект
+        </a>
+        <div class="location_mark">
+            <img src="/static/img/location_icon.svg" alt="">
+            <span>Тюмень</span>
+        </div>
     </div>
     <div class="categories">
         <div class="categories_menu">
@@ -29,9 +43,6 @@
             {% endfor %}
             
         </div>
-        <a class="add_new_project_button" href="{% url 'add_project' %}">
-            Добавить свой проект
-        </a>
         <template id="category_template">
             <div class="category">
                 <img src="/static/img/cross_icon.svg" alt="">
@@ -39,38 +50,43 @@
             </div>
         </template>
     </div>
+    <h2 class="items_title">Инвестпроекты</h2>
     <div class="container_items">
-
     </div>
 </div>
 
+<template id="advertisement_template">
+    <div class="advertisement"><h1>РЕКЛАМА</h1></div>
+</template>
+
 <template id="item_template">
     <div class="item_container">
-        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-        <a class="item_image_a" href="#">
-            <img class="item_image" src="/static/img/park.png" alt="" >
-        </a>
-        <div class="item_info">
-            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                <div class="info_metrics">
-                <div class="metrics_metric metric_attachments">
-                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                </div>
-                <div class="metrics_metric metric_attachments">
-                    <span class="metric_profitability     metric_profitability--info">20%</span>
-                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                </div>
-                <div class="metrics_metric metric_income">
-                    <span class="metric_info">
-                        <img class="metric_income--img" src="/static/img/money_icon.svg" alt="">
-                    </span>
+        <span class="date_post">1 января 2023, 12:01</span>
+        <div class="item">
+            <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+            <a class="item_image_a" href="#">
+                <img class="item_image" src="/static/img/park.png" alt="" >
+            </a>
+            <div class="item_info">
+                <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                    <div class="info_metrics">
+                    <div class="metrics_metric metric_attachments">
+                        <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                        <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                    </div>
+                    <div class="metrics_metric metric_attachments">
+                        <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                        <span class="metric_profitability     metric_profitability--info">20%</span>
+                    </div>
+                    <div class="metrics_metric metric_income">
+                        <span class="metric_info">
+                            Прибыль есть
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="see_button">
-            <a href="#">Смотреть</a>
-        </div>
+
     </div>
 </template>
 <script src="/static/js/AllInvestProjectsScripts.js"></script>

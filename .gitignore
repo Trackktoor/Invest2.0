@@ -4,6 +4,7 @@ __pycache__
 *.pyc
 *.docx#
 db.sqlite3
+*.sqlite3
 *.rar
 
 

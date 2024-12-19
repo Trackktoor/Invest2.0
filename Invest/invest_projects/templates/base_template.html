@@ -11,14 +11,8 @@
 </head>
 <body>
     <div>
-    <header>
-        <div class="left_header">
-            <a href="{% url 'all_projects' %}">
-            <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
-            
-        </div>
-        <div class="right_header">
-            <nav>
+        <header>
+            <div class="left_header">
                 <div class="overlay"></div>
 
                 <div class="burger_menu">
@@ -38,54 +32,143 @@
                         <a href="#">О нас</a>
                     </div>
                 </div>
-                <div class="profile">
-                    {% if request.user.is_authenticated %}
-                    {% if profile.avatar %}
-                        <a href="{% url 'profile' user.id %}">
-                            <img src="{{ profile.avatar.url }}" alt="">
-                        </a>
-                    {% else %}
-                        <a href="{% url 'profile' user.id %}">
-                            <img src="{% static 'img/profile.svg' %}" alt="">
-                        </a>
-                    {% endif %}
-                    <a href="#" class="count_notification">0</a>
-                        {{profile.username}}
-                    {% else %}
-                        <a href="{% url 'signup' %}">
-                            <img src="{% static 'img/profile.svg' %}" alt="">
-                        </a>
-                        <a href="#" class="count_notification">0</a>
-                    {% endif %}
-                </div>
-            </nav>
-        </div>
-    </header>
-    <div class="main_container">
-        {% block content %}
+                <a href="{% url 'all_projects' %}">
+                <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
+                
+            </div>
+            <div class="right_header">
+                <nav>
+                    <div class="nav_element">
+                        <a href="#">О StarInvest</a>
+                        
+                    </div>
+                    <div class="nav_element">
+                        <a href="#">Главная</a>
+                        
+                    </div>
+                    <div class="nav_element">
+                        <a href="#">Новости</a>
+                    </div>
+                    <div class="nav_element">
+                        <a href="#">Инвестиции</a>
+                    </div>
+                    <div class="nav_element">
+                        <a href="#">Площадки</a>
+                    </div>
+                    <div class="nav_element">
+                        <a href="#">Бизнес идеи</a>
+                    </div>
+                    <div class="nav_element nav_element_proifle">
+                        <a href="#">Личный кабинет</a>
+                    </div>
 
-        {% endblock %}
+                    <!-- <div class="profile">
+                        {% if request.user.is_authenticated %}
+                        {% if profile.avatar %}
+                            <a href="{% url 'profile' user.id %}">
+                                <img src="{{ profile.avatar.url }}" alt="">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'profile' user.id %}">
+                                <img src="{% static 'img/profile.svg' %}" alt="">
+                            </a>
+                        {% endif %}
+                        <a href="#" class="count_notification">0</a>
+                            {{profile.username}}
+                        {% else %}
+                            <a href="{% url 'signup' %}">
+                                <img src="{% static 'img/profile.svg' %}" alt="">
+                            </a>
+                            <a href="#" class="count_notification">0</a>
+                        {% endif %}
+                    </div> -->
+                </nav>
+            </div>
+        </header>
+        <div class="main_container">
+            {% block content %}
+
+            {% endblock %}
+        </div>
     </div>
-</div>
+    <div class="pagination">
+        <div class="pagination_arrow pagination_arrow_left">
+            <img src="/static/img/pagination_arrow_left.svg" alt="">
+        </div>
+        <div class="paginaition_items">
+            <div class="pagination_item pagination_item_active">
+                1
+            </div>
+            <div class="pagination_item">
+                2
+            </div>
+            <div class="pagination_item">
+                3
+            </div>
+            <div class="pagination_item">
+                4
+            </div>
+            <div class="pagination_item">
+                5
+            </div>
+            <div class="pagination_item">
+                6
+            </div>
+            <div class="pagination_item">
+                7
+            </div>
+            <div class="pagination_item">
+                8
+            </div>
+            <div class="pagination_item">
+                9
+            </div>
+            <div class="pagination_item">
+                10
+            </div>
+            <div class="pagination_item pagination_next_numbers">
+                ●●●
+            </div>
+            <div class="pagination_item">
+                100+
+            </div>
+        </div>
+        <div class="pagination_arrow pagination_arrow_left">
+            <img src="/static/img/pagination_arrow_right.svg" alt="">
+        </div>
+    </div>
     <footer>
-        <div class="contacts">
-            <a href="#">
-                <img src="{% static 'img/tg_icon.svg' %}" alt="">
-                <img src="{% static 'img/vk_icon.svg' %}" alt="">
-                <img src="{% static 'img/inst_icon.svg' %}" alt="">
-                <img src="{% static 'img/youtube_icon.svg' %}" alt="">
-            </a>
+    <div class="footer_logo">
+        <div class="footer_logo_container">
+            <img src="{% static 'img/logo.svg' %}" alt="" class="logo">
         </div>
-        <div class="footer_logo">
-            <h3>STAR INVEST PRESENTS</h3>
-            <a href="#">
-                <img src="{% static 'img/logo.svg' %}" alt="" class="logo">
-            </a>
+        <h2>STARINVEST PRESENTS</h2>
+    </div>
+
+    <div class="footer_social">
+        <div class="footer_social_item">
+            <a href="#"><img src="/static/img/tg_icon.svg" alt="">@starinvest</a>
         </div>
-        <div class="sub_info">
-            StarInvest 2023-2024 <br>
+        <div class="footer_social_item">
+            <a href="#"><img src="/static/img/vk_icon.svg" alt="">@starinvest</a>
+        </div>
+        <div class="footer_social_item">
+            <a href="#"><img src="/static/img/inst_icon.svg" alt="">@starinvest</a>
+        </div>
+        <div class="footer_social_item">
+            <a href="#"><img src="/static/img/youtube_icon.svg" alt="">@starinvest</a>
+        </div>
+    </div>
+
+    <div class="footer_info">
+        <span class="footer_info_text">
+            StarInvest 2023-2024
+        </span>
+        <span class="footer_info_text">
             <a href="#">Пользовательское соглашение</a>
-        </div>
+        </span>
+    </div>
+
     </footer>
     <script src="/static/js/BaseTemplateScripts.js"></script>
 </body>

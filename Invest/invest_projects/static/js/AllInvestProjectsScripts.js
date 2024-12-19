@@ -40,8 +40,19 @@ function GetAllProjectsAJAX() {
                 old_items_container = document.querySelector('.container_items').innerHTML = ''
                 let container = document.getElementsByClassName('container_items')[0]
                 for (let i = 0; i < response.length; i++){
+                    if (i % 6 == 0 && i != 0) {
+                        let itemTempalte = document.getElementById('advertisement_template')
+                        let advertisement = document.importNode(itemTempalte.content, true)
+                        console.log(advertisement.children)
+                        advertisement.appendChild(advertisement.children[0])
+                        container.appendChild(advertisement)
+                        console.log('ad')
+                    }
+                    console.log(i)
                     let new_item = CloneTemplateItemHTML(response[i])
                     container.appendChild(new_item)
+                    
+
                 }
             }
         }
@@ -99,7 +110,6 @@ function CloneTemplateItemHTML(item_info) {
     }
 
     item_container.querySelector('.metric_attachments--info').textContent = item_info['required_investment'] + ' ₽'
-
     return item_clone
 }
 
