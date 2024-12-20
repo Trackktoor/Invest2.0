@@ -36,65 +36,12 @@
                 <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
                 
             </div>
-            <div class="right_header">
-                <nav>
-                    <div class="nav_element">
-                        <a href="#">О StarInvest</a>
-                        
-                    </div>
-                    <div class="nav_element">
-                        <a href="#">Главная</a>
-                        
-                    </div>
-                    <div class="nav_element">
-                        <a href="#">Новости</a>
-                    </div>
-                    <div class="nav_element">
-                        <a href="#">Инвестиции</a>
-                    </div>
-                    <div class="nav_element">
-                        <a href="#">Площадки</a>
-                    </div>
-                    <div class="nav_element">
-                        <a href="#">Бизнес идеи</a>
-                    </div>
-                    <div class="nav_element nav_element_proifle">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'signup' %}">Личный кабинет</a>
-                        {% else %}
-                            <a href="{% url 'signup' %}">Личный кабинет</a>
-                        {% endif %}
-                    </div>
-
-                    <!-- <div class="profile">
-                        {% if request.user.is_authenticated %}
-                        {% if profile.avatar %}
-                            <a href="{% url 'profile' user.id %}">
-                                <img src="{{ profile.avatar.url }}" alt="">
-                            </a>
-                        {% else %}
-                            <a href="{% url 'profile' user.id %}">
-                                <img src="{% static 'img/profile.svg' %}" alt="">
-                            </a>
-                        {% endif %}
-                        <a href="#" class="count_notification">0</a>
-                            {{profile.username}}
-                        {% else %}
-                            <a href="{% url 'signup' %}">
-                                <img src="{% static 'img/profile.svg' %}" alt="">
-                            </a>
-                            <a href="#" class="count_notification">0</a>
-                        {% endif %}
-                    </div> -->
-                </nav>
-            </div>
         </header>
         <div class="main_container">
             <div class="title">
                 <a href="#" class="button_back">
                     <img src="/static/img/arrow_back.svg" alt=""> Назад
                 </a>
-                <h2>{% block title_page %}{% endblock %}</h2>
             </div>
             {% block content %}
 

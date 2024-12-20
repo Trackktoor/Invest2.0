@@ -8,14 +8,11 @@
     StarInvest - Главная
 {% endblock %}
     
+{% block title_page %}Главная{% endblock %}
+
 {% block content %}
 <div class="container">
-    <div class="title">
-        <a href="#" class="button_back">
-            <img src="/static/img/arrow_back.svg" alt=""> Назад
-        </a>
-        <h2>Главная</h2>
-    </div>
+
     <div class="search">
         <div class="search_input_container">
             <input placeholder="Поиск" type="text">
@@ -52,6 +49,52 @@
     </div>
     <h2 class="items_title">Инвестпроекты</h2>
     <div class="container_items">
+    </div>
+    <div class="pagination">
+        <div class="pagination_arrow pagination_arrow_left">
+            <img src="/static/img/pagination_arrow_left.svg" alt="">
+        </div>
+        <div class="paginaition_items">
+            <div class="pagination_item pagination_item_active">
+                1
+            </div>
+            <div class="pagination_item">
+                2
+            </div>
+            <div class="pagination_item">
+                3
+            </div>
+            <div class="pagination_item">
+                4
+            </div>
+            <div class="pagination_item">
+                5
+            </div>
+            <div class="pagination_item">
+                6
+            </div>
+            <div class="pagination_item">
+                7
+            </div>
+            <div class="pagination_item">
+                8
+            </div>
+            <div class="pagination_item">
+                9
+            </div>
+            <div class="pagination_item">
+                10
+            </div>
+            <div class="pagination_item pagination_next_numbers">
+                ●●●
+            </div>
+            <div class="pagination_item">
+                100+
+            </div>
+        </div>
+        <div class="pagination_arrow pagination_arrow_left">
+            <img src="/static/img/pagination_arrow_right.svg" alt="">
+        </div>
     </div>
 </div>
 

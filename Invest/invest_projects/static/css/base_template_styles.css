@@ -193,8 +193,12 @@ header {
     font-weight: bold;
 }
 
+.title {
+    margin: 0 calc(5% + 25px);
+}
+
 .pagination {
-    margin: 75px 100px;
+    margin: 75px 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
