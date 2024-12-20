@@ -57,8 +57,6 @@ header {
     font-size: 24px;
     display: flex;
     align-items: center;
-    margin-right: 12.59%;
-    /*end*/
 }
 
 .left_header > a {
@@ -98,9 +96,7 @@ header {
 }
 
 .burger_menu {
-    
     z-index: 5;
-    margin-right: 35px;
     display: flex;
     flex-direction: column;
 }

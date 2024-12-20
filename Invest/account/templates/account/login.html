@@ -1,4 +1,4 @@
-{% extends 'base_template.html' %}
+{% extends 'base_template_reg_log.html' %}
 
 {% block styles %}
     <link rel="stylesheet" href="/static/css/login.css">
@@ -13,22 +13,25 @@
         <h1>Вход</h1>
         <form method="POST">
             {% csrf_token %}
-            <div class="login_input_container">
-                <div class="{% if form.email.errors or form.errors %}input_container_error{% else %}input_container{% endif %}">
-                    <img src="/static/img/mail_svg_icon.svg" alt="" class="input_img">
-                    <input name="email" class="login_input" placeholder="{% if form.email.errors %}{{ form.email.errors|join:', ' }}{%  else %} {% if errors %}{{ errors }}{% else %}Почта{% endif %}{% endif %}" type="text">
-                </div>
+            <input name="email_or_username" type="text" placeholder="Почта \ Имя Фамилия" class="input_login">
+            <div class="personal-password-container">
+                <input type="password" name="password" placeholder="Пароль" class="input-password" required> 
+                <img src="/static/img/no_eye.svg" alt="">
             </div>
-            <div class="login_input_container">
-                <div class="{% if form.password.errors or form.errors %}input_container_error{% else %}input_container{% endif %}">
-                    <img src="/static/img/lock_svg_icon.svg" alt="" class="input_img">
-                    <input name="password" class="login_input" placeholder="{% if form.password.errors %}{{ form.password.errors|join:', ' }}{%  else %}{% if errors %}{{ errors }}{% else %}Пароль{% endif %}{% endif %}" type="password">
-                </div>
-            </div>
-            <div class="container_button">
-                <input type="submit" value="Войти">
-                <a href="#">Забыл пароль</a>
+            <div class="form_errors">Вывод ошибки</div>
+            <button type="submit">Войти</button>
+            <a href="#" class="forgot_password">
+               <span>Забыл пароль</span> 
+                <hr>
+            </a>
+            <div class="href_registration">
+                <span>Нет аккаунта?</span>
+                <a href="#">
+                    <span>Зарегистируйся!</span>
+                    <hr>
+                </a>
             </div>
         </form>
     </div>
+    <script src="/static/js/LoginScripts.js"></script>
 {% endblock %}

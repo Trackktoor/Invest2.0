@@ -73,3 +73,18 @@ document.querySelectorAll('.personal-password-container').forEach(img => {
 });
 
 document.querySelector('input[name="phone"]').addEventListener('keydown', foo);
+
+document.getElementById('form_signup').addEventListener('submit', function(event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+
+    // Получаем значения из полей имени и фамилии
+    const firstName = document.querySelector('input[name="first_name"]').value;
+    const lastName = document.querySelector('input[name="last_name"]').value;
+
+    // Присваиваем значение полю username
+    const usernameInput = document.querySelector('input[name="username"]');
+    usernameInput.value = `${firstName} ${lastName}`; // Объединяем имя и фамилию
+
+    // Теперь можно отправить форму
+    this.submit(); // Отправляем форму
+});

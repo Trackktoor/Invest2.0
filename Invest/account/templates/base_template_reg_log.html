@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/base_template_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_template_reg_log_styles.css' %}">
     <link rel="shortcut icon" href="{% static 'img/logo.svg' %}" />
     {% block styles %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
@@ -31,11 +32,10 @@
                         <a href="#">Новости</a>
                         <a href="#">О нас</a>
                     </div>
-                </div>
-                <a href="{% url 'all_projects' %}">
-                <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
-                
+                </div>                
             </div>
+            <a href="{% url 'all_projects' %}" class="header_href_home">
+            <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
         </header>
         <div class="main_container">
             <div class="title">

@@ -9,25 +9,25 @@
 {% endblock %}
     
 {% block content %}
-
     <div class="signup_container">
-        <form method="POST">
+        <form method="POST" id="form_signup" enctype="multipart/form-data">
             {% csrf_token %}
             <h1>Регистрация</h1>
             <div class="form-group personal-name-surname-errors">
-                <input type="text" class="form-group-input" placeholder="Имя">
-                <input type="text" class="form-group-input" placeholder="Фамилия">
+                <input type="text" class="form-group-input" name="first_name" placeholder="Имя" required>
+                <input type="text" class="form-group-input" name="last_name" placeholder="Фамилия" required>
+                <input type="text" name="username" hidden>
                 <div class="form-group-input form-group-errors">Вывод ошибки</div>
             </div>
             <div class="form-group personal-number-email">
-                <input name="phone"  type="text" class="form-group-input" placeholder="Телефон">
+                <input name="phone"  type="text" class="form-group-input" placeholder="Телефон" required>
                 <!-- <input name="phone" class="signup_input" placeholder="{% if form.phone.errors %}{{ form.phone.errors|join:', ' }}{%  else %}+7 (___) ___-__-__{% endif %}" type="text"> -->
-                <input type="text" class="form-group-input" placeholder="Почта">
+                <input type="text" class="form-group-input" name="email" placeholder="Почта" required>
             </div>
             <div class="form-group personal-avatar-role-password">
                 <div class="personal-avatar">
                     <label class="custom-file-label" for="avatar-input">Выбрать фото</label>
-                    <input type="file" id="avatar-input">
+                    <input type="file" id="avatar-input" name="avatar" accept="image/*" >
                     <img id="avatar-preview" src="/static/img/example_avatar.png" alt="">
                 </div>
                 <div class="personal-role-password">
@@ -36,14 +36,14 @@
                             <div>
                                 Я инвестор
                                 <label>
-                                    <input type="radio" name="role" value="Инвестор" checked>
+                                    <input type="radio" name="interest" value="investing" checked>
                                     <span class="custom-label"></span>
                                 </label>
                             </div>
                             <div>
                                 Я ищу инвесторов
                                 <label>
-                                    <input type="radio" name="role" value="Предприниматель" >
+                                    <input type="radio" name="interest" value="project" >
                                     <span class="custom-label"></span>
                                 </label>
                             </div>
@@ -56,20 +56,20 @@
                         </div>
                     </div>
                     <div class="personal-password-container">
-                        <input type="password" placeholder="Пароль" class="input-password">
+                        <input type="password" name="password1" placeholder="Пароль" class="input-password" required> 
                         <img src="/static/img/no_eye.svg" alt="">
                     </div>
                     <div class="personal-password-container">
-                        <input type="password" placeholder="Повторите пароль" class="input-password">
+                        <input type="password" name="password2" placeholder="Повторите пароль" class="input-password" required>
                         <img src="/static/img/no_eye.svg" alt="">
                     </div>
                     <div class="access-panel">
-                        <a href="#" class="access-href access-login">
-                            Вход
+                        <a href="{% url 'login' %}" class="access-href access-login">
+                            Войти
                         </a>
-                        <a href="#" class="access-href access-registrate">
+                        <button type="submit" class="access-href access-registrate">
                             Регистрация
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

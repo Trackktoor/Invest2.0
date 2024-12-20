@@ -29,8 +29,11 @@ class SignupForm(UserCreationForm):
     """
         Форма для регистрацию через почту
     """
+    first_name = forms.CharField(label='Имя', max_length=30)
+    last_name = forms.CharField(label='Фамилия', max_length=30)
+    avatar = forms.ImageField(label='аватар')
     username = forms.CharField(
-        max_length=32,
+        max_length=60,
         required=True,
         error_messages={
             "required": "Обязательное поле"
@@ -73,13 +76,12 @@ class SignupForm(UserCreationForm):
             "placeholder": "Повторить пароль",
         })
     )
-    
     class Meta:
         """
             Конфигурация формы
         """
         model = User
-        fields = ("username", "email", "password1", "password2",)
+        fields = ("first_name","last_name","username", "email", "password1", "password2","avatar")
 
 
     def clean_username(self):
@@ -88,7 +90,7 @@ class SignupForm(UserCreationForm):
         elif len(self.cleaned_data['username']) < 5:
             raise forms.ValidationError("Минимум 5 знаков")
         else:
-            return self.cleaned_data['username']
+            return self.cleaned_data['first_name'] + '_' + self.cleaned_data['last_name']
         
     
     def clean_email(self):
@@ -123,7 +125,7 @@ class SignupForm(UserCreationForm):
         
     
 class SignIn(forms.ModelForm):
-    email = forms.EmailField(
+    email_or_username = forms.CharField(
         max_length=50,
         required=True,
         error_messages={
@@ -145,13 +147,18 @@ class SignIn(forms.ModelForm):
             Конфигурация формы
         """
         model = User
-        fields = ("email",)
+        fields = ("email_or_username",'password')
     
     def clean_email(self):
-        try:
-            validate_email(self.cleaned_data["email"])
-        except ValidationError:
-            raise forms.ValidationError("Укажите корректную почту")
-        if not User.objects.filter(email=self.cleaned_data["email"]).exists():
-            raise forms.ValidationError("Неправильные данные")
-        return self.cleaned_data["email"]
+        if '@' in self.cleaned_data['email_or_username']:
+            try:
+                validate_email(self.cleaned_data["email"])
+            except ValidationError:
+                raise forms.ValidationError("Укажите корректную почту")
+            if not User.objects.filter(email=self.cleaned_data["email_or_username"]).exists():
+                raise forms.ValidationError("Неправильные данные")
+            return self.cleaned_data["email"]
+        else:
+            if not User.objects.filter(username=self.cleaned_data['email_or_username']).exists():
+                raise forms.ValidationError('Неправильные данные')
+            return self.cleaned_data['email_or_username']

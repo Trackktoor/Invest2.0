@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Wadik';   
+    src: url('../fonts/Wadik.otf') format('opentype');
+}
+
+.logo {
+    width: 50px;
+}
+
+.header_href_home {
+    margin: 0 auto;
+    position: relative;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    font-family: 'Wadik', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}

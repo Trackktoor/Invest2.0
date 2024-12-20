@@ -35,38 +35,47 @@ def Signup(request: HttpRequest) -> HttpResponse:
         return render(request,'account/signup.html')
 
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = SignupForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.set_password(request.POST['password1'])
-            user.save()
-            user.username = request.POST['email']
-            user.save()
-            profile = Profile(
-                user=user,
-                username=request.POST['username'],
-                phone_number=request.POST['phone'],
-                interest=request.POST['interest']
-            )
-            profile.save()
-            current_site = get_current_site(request)
-            mail_subject = 'Ссылка для активации отправлена ​​на ваш адрес электронной почты'
-            message = render_to_string('account/acc_activate_email.html',
-                {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-                }
-            )
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                mail_subject,
-                message,
-                to=[to_email]
-            )
-            email.send()
+            try:
+                user = form.save(commit=False)
+                user.is_active = False
+                user.set_password(request.POST['password1'])
+                user.save()
+                user.username = request.POST['username']
+                user.save()
+
+                avatar = request.FILES.get('avatar')
+
+                profile = Profile(
+                    user=user,
+                    username=request.POST['username'],
+                    phone_number=request.POST['phone'],
+                    interest=request.POST['interest'],
+                    avatar=avatar
+                )
+                profile.save()
+                current_site = get_current_site(request)
+                mail_subject = 'Ссылка для активации отправлена ​​на ваш адрес электронной почты'
+                message = render_to_string('account/acc_activate_email.html',
+                    {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                    }
+                )
+                to_email = form.cleaned_data.get('email')
+                email = EmailMessage(
+                    mail_subject,
+                    message,
+                    to=[to_email]
+                )
+                email.send()
+            except Exception as e:
+                print(e)
+                user.delete()
+                
             return render(request, 'account/signup_link_send.html')
 
         else:
@@ -80,7 +89,10 @@ def LogIn(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = SignIn(request.POST)
         if form.is_valid():
-            user = User.objects.get(email=form.cleaned_data['email'])
+            if '@' in form.cleaned_data['email_or_username']:
+                user = User.objects.get(email=form.cleaned_data['email_or_username'])
+            else:
+                user = User.objects.get(username=form.cleaned_data['email_or_username'])
             print(form.cleaned_data)
             if user.check_password(form.cleaned_data['password']):
                 authenticate(username=user.username, password=form.cleaned_data['password'])
