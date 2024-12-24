@@ -19,7 +19,6 @@ function GetAllProjectsAJAX() {
         // Для категорий
         arguments_url.push("categories[]=" + encodeURIComponent(target_categories))
     }
-    console.log(arguments_url)
     for (let i = 0; i < arguments_url.length; i++) {
         if (i == 0) {
             query_url += '?'+arguments_url[i]
@@ -27,7 +26,6 @@ function GetAllProjectsAJAX() {
         query_url += '&'+arguments_url[i]
 
     }
-    console.log(query_url)
     xhr.open('GET', query_url, true)
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
@@ -35,7 +33,6 @@ function GetAllProjectsAJAX() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var response = xhr.responseText;
             var response = JSON.parse(response);
-            console.log(response)
             if (response != undefined){
                 old_items_container = document.querySelector('.container_items').innerHTML = ''
                 let container = document.getElementsByClassName('container_items')[0]
@@ -43,12 +40,9 @@ function GetAllProjectsAJAX() {
                     if (i % 6 == 0 && i != 0) {
                         let itemTempalte = document.getElementById('advertisement_template')
                         let advertisement = document.importNode(itemTempalte.content, true)
-                        console.log(advertisement.children)
                         advertisement.appendChild(advertisement.children[0])
                         container.appendChild(advertisement)
-                        console.log('ad')
                     }
-                    console.log(i)
                     let new_item = CloneTemplateItemHTML(response[i])
                     container.appendChild(new_item)
                     
@@ -68,23 +62,43 @@ function click_category(event){
     if (target_categories.includes(target_element.textContent.trim()) == false){
         target_categories.push(target_element.textContent.trim())
         target_element.classList.toggle('clicked')
+        console.log('Click')
         GetAllProjectsAJAX(target_categories)
     }
     else{
         target_categories = target_categories.filter((word) => word != target_element.textContent.trim())
         target_element.classList.remove('clicked')
+        console.log('Remove')
         GetAllProjectsAJAX()
     }
 }
 
-function show_categories_menu(){
+function show_categories_menu(event){
     let categories_menu_items = document.querySelector('.categories_menu_items')
-    if (categories_menu_items.style.display == 'none' || categories_menu_items.style.display == ''){
-        categories_menu_items.style.display = 'flex'
+    let items_category = document.querySelectorAll('.category')
+    let categories_title = document.querySelector('.categories_title')
+    let categories_menu = document.querySelector('.categories_menu')
+
+    if (!event.target.classList.contains('category')) {
+        if (categories_menu_items.style.display == 'none' || categories_menu_items.style.display == ''){
+            for (let i = 0; i < items_category.length; i++) {
+                items_category[i].style.display = 'flex'
+            }
+            categories_title.style.marginBottom = '15px'
+            categories_menu_items.style.display = 'flex'
+            categories_menu.classList.add('categories_menu_active')
+        }
+        else {
+            for (let i = 0; i < items_category.length; i++) {
+                items_category[i].style.display = 'none'
+            }
+            categories_title.style.marginBottom = '0'
+            categories_menu_items.style.display = 'none'
+            categories_menu.classList.remove('categories_menu_active')
+        }
     }
-    else {
-        categories_menu_items.style.display = 'none'
-    }
+
+
 }
 
 function CloneTemplateItemHTML(item_info) {

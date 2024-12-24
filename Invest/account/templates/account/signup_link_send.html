@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block title %}
-    StarInvest - Письмо отправлено
+    StarInvest - Ошибка
 {% endblock %}
     
 {% block content %}
-    <h1>Ссылка на регистрацию была успешно отправлена вам на почту!</h1>
-{% endblock %}
+<div class="contnet_error">
+    <h1>Регистрация</h1>
+    <hr>
+    <div class="link_error_content">
+        Ссылка для регистрации была успешно отправлена вам на почту!<br>
+    <span class="warning_text">Внимание! Ссылка может быть отправленна в спам.</span>
+    </div>
+</div>
+{% endblock %}  

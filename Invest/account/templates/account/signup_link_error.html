@@ -9,10 +9,15 @@
 {% endblock %}
     
 {% block content %}
-<div class="link_error_content">
-Уупс.. Ваша ссылка устарела, попробуйте ещё раз зарегистрироваться! <br> Приносим свои извенения
-<div class="signup_link">
-    <a href="{% url 'signup' %}">Регистрация</a>
-</div>
+<div class="contnet_error">
+    <h1>Регистрация</h1>
+    <hr>
+    <div class="link_error_content">
+    Уупс.. Ваша ссылка устарела, попробуйте ещё раз зарегистрироваться! <br> Приносим свои извенения! <br>
+    <span class="warning_text">Внимание! Ссылка может быть отправленна в спам.</span>
+    <div class="signup_link">
+        <a href="{% url 'signup' %}">Зарегистрироваться</a>
+    </div>
+    </div>
 </div>
 {% endblock %}  

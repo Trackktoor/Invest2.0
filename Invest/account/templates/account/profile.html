@@ -1,4 +1,4 @@
-{% extends 'account/base_template_profile.html' %}
+{% extends 'base_template.html' %}
 
 {% block styles %}
     <link rel="stylesheet" href="/static/css/profile.css">
@@ -8,58 +8,219 @@
     StarInvest - Профиль
 {% endblock %}
     
-{% block content_account %}
+{% block content %}
 
-    <div class="main_info_header">
-        <div class="avatar">
-            <div class="avatar_container">
-                {% if not current_profile.avatar %}
-                    <img src="/static/img/profile.svg" alt="" class="avatar_img">
-                {% else %}
-                    <img src="{{ current_profile.avatar.url }}" alt="" class="avatar_img">
-                {% endif %}
-                <div class="avatar_info">
-                    <h2>{{current_profile.username}}</h2>
-                    {% if current_profile.profile_status != None %}
-                    {{current_profile.profile_status}}
-                    {% else %}
-                    Здесь пока пусто...
-                    {% endif %}
-                </div>
-            </div>
-            <div class="change_profile">
-                <a href="{% url 'edit_profile' %}">Редактировать</a>
-            </div>
-        </div>
-        <div class="info_container_inner">
-            <div class="profile_photos">
-                {% if current_profile.images.count != 0 %}
-                {% for image in current_profile.images.all %}
-                <div class="photo_item_a" style="background-image: url({{image.image.url}});">
-
-                </div>
-                {% endfor %}
-
-                {% else %}
-                Здесь пока пусто..
-                {% endif %}
-            </div>
-            <div class="profile_description">
-                О себе
-                <div class="profile_description_text">
-                        {% if current_profile.profile_info != None  %}
-                            {{current_profile.profile_info}}
-                        {% else %}
-                            Здесь пока пусто..
-                        {% endif %}
+    <div class="profile_container">
+        <div class="header_profile">
+            <div class="header_profile_info">
+                <div class="profile_image" style="background-image: url('/static/img/example_avatar_profile.jpg');"></div>
+                <h2 class="header_profile_info_username">Денис Зубенко</h2>
+                <div class="header_profile_info_status">Сооснователь сервиса FoxInvest, хороший программист и человек :)</div>
+                <div class="header_profile_info_last_online"><span class="header_profile_info_last_online_znak">⚫</span> Был(а) в сети в 22:22</div>
+                <div class="contacts_buttons">
+                    <div class="contact_button contact_button_call">Позвонить</div>
+                    <div class="contact_button contact_button_message">Написать</div>
                 </div>
             </div>
         </div>
-
+        <div class="profile_info">
+            <h2>Информация</h2>
+            <div class="profile_info_main_text">
+                <div class="profile_info_main_text_container">
+                    <div class="profile_info_main_text_carier">
+                        <div class="profile_info_main_text_carier_item">
+                            <h2>КАРЬЕРА</h2>
+                            <span>Компания</span>
+                            <span>Отрасль</span>
+                            <span>Должность</span>
+                            <span>Сайт компании</span>
+                        </div>
+                        <div class="profile_info_main_text_carier_item profile_info_main_text_carier_item-info">
+                            <span>StarInvest</span>
+                            <span>Cистемное програмное обеспечение </span>
+                            <span>Программист</span>
+                            <span>StarInves.com</span>
+                        </div>
+                    </div>
+                    <div class="profile_info_main_text_about_i">
+                        <h2>О СЕБЕ</h2>
+                        <div class="profile_info_main_text_about_i_text">
+                            Что-то здесь надо писать но по желанию :) Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию 
+                        </div>
+                    </div>
+                </div>
+                <div class="profile_info_sub_text_container">
+                    <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
+                    <div class="profile_info_sub_text">
+                        Что-то здесь надо писать но по желанию :) Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user_media user_media-projects">
+            <h2>Проекты пользователя</h2>
+            <div class="user_media-container">
+                <div class="item_container">
+                    <div class="item">
+                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+                        <a class="item_image_a" href="#">
+                            <img class="item_image" src="/static/img/park.png" alt="" >
+                        </a>
+                        <div class="item_info">
+                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                                <div class="info_metrics">
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                                </div>
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                                    <span class="metric_profitability     metric_profitability--info">20%</span>
+                                </div>
+                                <div class="metrics_metric metric_income">
+                                    <span class="metric_info">
+                                        Прибыль есть
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item_container">
+                    <div class="item">
+                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+                        <a class="item_image_a" href="#">
+                            <img class="item_image" src="/static/img/park.png" alt="" >
+                        </a>
+                        <div class="item_info">
+                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                                <div class="info_metrics">
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                                </div>
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                                    <span class="metric_profitability     metric_profitability--info">20%</span>
+                                </div>
+                                <div class="metrics_metric metric_income">
+                                    <span class="metric_info">
+                                        Прибыль есть
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item_container">
+                    <div class="item">
+                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+                        <a class="item_image_a" href="#">
+                            <img class="item_image" src="/static/img/park.png" alt="" >
+                        </a>
+                        <div class="item_info">
+                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                                <div class="info_metrics">
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                                </div>
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                                    <span class="metric_profitability     metric_profitability--info">20%</span>
+                                </div>
+                                <div class="metrics_metric metric_income">
+                                    <span class="metric_info">
+                                        Прибыль есть
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item_container">
+                    <div class="item">
+                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
+                        <a class="item_image_a" href="#">
+                            <img class="item_image" src="/static/img/park.png" alt="" >
+                        </a>
+                        <div class="item_info">
+                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
+                                <div class="info_metrics">
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
+                                </div>
+                                <div class="metrics_metric metric_attachments">
+                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                                    <span class="metric_profitability     metric_profitability--info">20%</span>
+                                </div>
+                                <div class="metrics_metric metric_income">
+                                    <span class="metric_info">
+                                        Прибыль есть
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user_media user_media-photos">
+            <h2>Фотографии пользователя</h2>
+            <div class="user_media-container">
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+                <div class="item_container item_container-photo">
+                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
+                </div>
+            </div>
+        </div>
+        <div class="user_media user_media-videos">
+            <h2>Видео пользователя</h2>
+            <div class="user_media-container user_media-container_videos">
+                <div class="item_container item_container-video">
+                    <div class="item_container_video" style="background-image: url('/static/img/example_photo_video_profile.png');"></div>
+                </div>
+                <div class="item_container item_container-video">
+                    <div class="item_container_video" style="background-image: url('/static/img/example_photo_video_profile.png');"></div>
+                </div>
+                <div class="item_container item_container-video">
+                    <div class="item_container_video" style="background-image: url('/static/img/example_photo_video_profile.png');"></div>
+                </div>
+                <div class="item_container item_container-video">
+                    <div class="item_container_video" style="background-image: url('/static/img/example_photo_video_profile.png');"></div>
+                </div>
+                <div class="item_container item_container-video">
+                    <div class="item_container_video" style="background-image: url('/static/img/example_photo_video_profile.png');"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         if ({{current_profile.user.id}} != {{user.id}}){
             document.getElementsByClassName('change_profile')[0].remove()
         }
     </script>
+
+
 {% endblock %}

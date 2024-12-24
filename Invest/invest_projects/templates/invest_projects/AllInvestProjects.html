@@ -30,15 +30,17 @@
     </div>
     <div class="categories">
         <div class="categories_menu">
-            Категории
-        </div>
-        <div class="categories_menu_items">
+            <span class="categories_title">
+                Категории
+            </span>
             {% for category in categories %}
             <div class="category">
                 {{category.title}}
             </div>
             {% endfor %}
-            
+        </div>
+        <div class="categories_menu_items">
+
         </div>
         <template id="category_template">
             <div class="category">

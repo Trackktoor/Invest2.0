@@ -3,6 +3,7 @@
 }
 
 .container {
+    position: relative;
     margin: 0px 5%;
     height: 100%;
 }
@@ -126,26 +127,31 @@
 /*CATEGORIES*/
 
 .categories {
+    min-height: 35px;
     position: relative;
+    overflow: visible;
     margin-top: 15px;
+    max-height: 35px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
 }
 
 .categories_menu {
+    z-index: 3;
     font-size: 14px;
     font-weight: bold;
     border-radius: 15px;
     padding: 9px 25px;
-    background-color:  #1919194f;
+    background-color:  #BCBFC4;
+    color: black;
     height: min-content;
 }
+
 
 .categories_menu_items {
     position: absolute;
     top: 60px;
-    background-color: #d4e7ff;  
     padding: 10px;
     padding-left: 0;
     max-width: 520px;
@@ -156,7 +162,6 @@
     flex-direction: row;
     border-radius: 10px;
     flex-wrap: wrap;
-    border: 1px solid black;
     display: none;
 }
 
@@ -169,24 +174,28 @@
 }
 
 .category {
-    margin-left: 10px;
-    padding: 7px;
+    margin-bottom: 10px;
     height: fit-content;
-    align-self: center;
-    background-color: #D9D9D9;
-    font-size: 18px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    border: 1px solid black;
+    font-size: 14px;
+    font-weight: 100;
+    display: none;
+}
+
+
+
+.categories_menu_active {
+    padding: 25px;
+    padding-right: 45px;
+}
+
+.categories_title {
+    font-weight: bold;
+    display: block;
 }
 
 .category img {
     width: 20px;
 }
-
 
 .category:hover {
     cursor: pointer;

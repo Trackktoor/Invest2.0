@@ -14,7 +14,6 @@
         <header>
             <div class="left_header">
                 <div class="overlay"></div>
-
                 <div class="burger_menu">
                     <div class="menu_line"></div>
                     <div class="menu_line"></div>
@@ -22,18 +21,45 @@
                 </div>
                 <div class="burger_menu_sub_menu">
                     <div class="sub_menu_container">
-                        <a href="{% url 'all_projects' %}">Главная</a>
-                        {% if user.is_authenticated %}
+                        <div class="sub_menu_container_item">
+                            {% if user.is_authenticated %}
+                            <img src="/static/img/burger_menu_profile.svg" alt="">
                             <a href="{% url 'profile' user.id %}">Профиль</a>
-                        {% else %}
-                            <a href="{% url 'signup' %}">Профиль</a>
-                        {% endif %}
-                        <a href="#">Новости</a>
-                        <a href="#">О нас</a>
+                            {% else %}
+                                <img src="/static/img/burger_menu_profile.svg" alt="">
+                                <a href="{% url 'signup' %}">Профиль</a>
+                            {% endif %}  
+                        </div>
+                        <div class="sub_menu_container_item">
+                            <img src="/static/img/burger_menu_my_projects.svg" alt="">
+                            <a href="{% url 'my_projects' %}">Мои проекты</a>
+                        </div>
+                        <div class="sub_menu_container_item">
+                            <img src="/static/img/burger_menu_achievements.svg" alt="">
+                            <a href="{% url 'all_projects' %}">Достижения</a>
+                        </div>
+                        <div class="sub_menu_container_item">
+                            <img src="/static/img/burger_menu_reports.svg" alt="">
+                            <a href="{% url 'all_projects' %}">Ваши жалобы</a>
+                        </div>
+                        <div class="sub_menu_container_item">
+                            <img src="/static/img/burger_menu_support.svg" alt="">
+                            <a href="{% url 'all_projects' %}">Поддержка</a>
+                        </div>
+                        <div class="sub_menu_container_item">
+                            <img src="/static/img/burger_menu_help_project.svg" alt="">
+                            <a href="{% url 'all_projects' %}">Помощь проекту</a>
+                        </div>
+                        
+                        <div class="sub_menu_container_item sub_menu_container_item-add_project">
+                            <img src="/static/img/burger_menu_add_project.svg" alt="">
+                            <a href="{% url 'all_projects' %}">Добавить проект</a>
+                        </div>
                     </div>
                 </div>
-                <a href="{% url 'all_projects' %}">
-                <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest</a>
+                <a class="left_header_logo" href="{% url 'all_projects' %}">
+                    <img src="{% static 'img/logo.svg' %}" alt="" class="logo">StarInvest
+                </a>
                 
             </div>
             <div class="right_header">
@@ -60,7 +86,7 @@
                     </div>
                     <div class="nav_element nav_element_proifle">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'signup' %}">Личный кабинет</a>
+                            <a href="{% url 'profile' user.id %}">Личный кабинет</a>
                         {% else %}
                             <a href="{% url 'signup' %}">Личный кабинет</a>
                         {% endif %}

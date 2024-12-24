@@ -12,72 +12,94 @@
 {% block content %}
 
     <div class="project_container">
-        <div class="project_header" style="background-image: url({{ project.background_image.url }});">
-            <div class="header_background_blackout">
-                <div class="category">
-                    {{ project.category.first }}
-                </div>
-                <img src="/media/{{ project.project_avatar }}" class="project_avatar">
-                <h1>{{ project.title }}</h1>
-                <div class="project_help_info">
-                    <div>
-                        Доходность: {{ project.profit_per_month }}%
-                        {% if project.profit_parametr == 'Месяц' or project.profit_parametr == 'mouth' %}
-                         в месяц
-                        {% else %}
-                         в год
-                        {% endif %}
-                        <br> 
-                        Требуемые инвестиции: {{project.required_investment}} ₽
+        <div class="project_header">
+            <div class="project_header_logo_div" style="background-image: url('/static/img/example_background_header_project.png');">
+                <div class="dimming_block"></div>
+                <div class="project_category">Строительство</div>
 
+                <div class="project_header_logo_div_container">
+                    <div class="project_logo">
+                        <div class="project_logo_img" style="background-image: url('/static/img/example_logo_project.png');"></div>
+                        <span class="title_proejct">
+                            Инвестиции в строительство ЖК
+                        </span>
                     </div>
-                    <img src="/static/img/shield_svg_icon.svg">
+                </div>
+                <div class="project_information">
+                    <div class="project_information_text">
+                        <span>Доходность: <span class="project_information_text_number"> 10-20%</span> </span>
+                        <span>Требуемые инвестиции:<span class="project_information_text_number"> 20-100млн ₽</span> </span>
+                    </div>
+                    <img src="/static/img/proven_project_svg.svg" alt="" class="proven_project_img">
+                </div>
+
+            </div>
+        </div>
+        <div class="main_info">
+            <div class="project_description">
+                <div class="project_description_img" style="background-image: url('/static/img/example_project_description_img.png');"></div>
+                <span class="projects_description_text">
+                    Sofi Сonsult – Это управленческий HR-консалтинг. Компания помогает бизнесу выстроить результативную систему управления персоналом от найма до управления талантами действующих сотрудников
+                    <span class="projects_description_text_city">Город: Тюмень</span>
+                </span>
+            </div>
+            <div class="project_contact">
+                <div class="project_contact_persona">
+                    <div class="project_contact_persona_img" style="background-image: url('/static/img/example_avatar_persona.png');"></div>
+                    <div class="project_contact_persona_username">Сергей Иванов</div>
+                    <div class="project_contact_persona_job">Основатель компании</div>
+                </div>
+                <div class="project_user_contact_buttons">
+                    <div class="user_contact_buttons-item user_contact_buttons-call">Позвонить</div>
+                    <div class="user_contact_buttons-item user_contact_buttons-message">Написать</div>
                 </div>
             </div>
         </div>
-        <div class="project_body">
-            <div class="project_main_info">
-                <div class="slider">
-                    <button id="prev" class="nav-btn">&#60;</button>
-                    <div id="slides-container" class="slides-container">
-                        {% for image in project.images.all %}
-                            <div class="slide">
-                                <img src="{{image.image.url}}">
-                            </div>
-                        {% endfor %}
+        <div class="sub_description">
+            <div class="sub_description_title">
+                Какие объекты покупаем:
+            </div>
+            <div class="sub_description_text">
+                Спецтехнику, которая прошла успешно выездную проверку квалифицированным механиком,
+                а также имеющую потенциальную маржинальность до 70%. Спецтехнику, которая прошла успешно выездную проверку квалифицированным механиком,
+                а также имеющую потенциальную маржинальностСпецтехнику, которая прошла успешно выездную проверку квалифицированным механиком
+            </div>
+            <div class="sub_description_imgs">
+                <div class="sub_description_imgs-item sub_description_imgs-main_img" style="background-image: url('/static/img/example_photo_sub_description_main_photo.png');"></div>
+                <div class="sub_description_imgs-item sub_description_imgs-sub_img" style="background-image: url('/static/img/example_photo_sub_description_sub_photo1.png');"></div>
+                <div class="sub_description_imgs-item sub_description_imgs-sub_img" style="background-image: url('/static/img/example_photo_sub_description_sub_photo2.png');"></div> 
+            </div>
+        </div>
+        <div class="sub_description">
+            <div class="sub_description_title">
+                Какие объекты покупаем:
+            </div>
+            <div class="sub_description_text">
+                Спецтехнику, которая прошла успешно выездную проверку квалифицированным механиком,
+                а также имеющую потенциальную маржинальность до 70%. Спецтехнику, которая прошла успешно выездную проверку квалифицированным механиком,
+                а также имеющую потенциальную маржинальностСпецтехнику, которая прошла успешно выездную проверку квалифицированным механиком
+            </div>
+            <div class="sub_description_imgs">
+                <div class="sub_description_imgs-item sub_description_imgs-main_img" style="background-image: url('/static/img/example_photo_sub_description_main_photo.png');"></div>
+                <div class="sub_description_imgs-item sub_description_imgs-sub_img" style="background-image: url('/static/img/example_photo_sub_description_sub_photo1.png');"></div>
+                <div class="sub_description_imgs-item sub_description_imgs-sub_img" style="background-image: url('/static/img/example_photo_sub_description_sub_photo2.png');"></div> 
+            </div>
+        </div>
+        <div class="duplicate-contact">
+            <div class="duplicate-contact-img_username_job">
+                <div class="duplicate-contact-img" style="background-image: url('/static/img/example_avatar_persona.png');"></div>
+                <div class="duplicate-contact-username_job">
+                    <div class="duplicate-contact-username">
+                        Сергей Иванов
                     </div>
-                    <button id="next" class="nav-btn">&#62;</button>
-                </div>
-                <!-- <div class="slider_container">
-                    <span class="slider_nav_element next">&gt;</span>
-                    <span class="slider_nav_element back">&lt;</span>
-                    <div class="slider">
-                        {% for image in project.images.all %}
-                            <div class="slider_img_item_container">
-                                <img class="slider_img_item" src="{{image.image.url}}">
-                            </div>
-                        {% endfor %}
+                    <div class="duplicate-contact-job">
+                        Основатель компании
                     </div>
-                </div> -->
-                <div class="main_info_text">
-                    {{ project.description }}
                 </div>
             </div>
-            <div class="project_contacts">
-                <div class="project_author">
-                    <a href="#">
-                        {% if profile.avatar %}
-                            <img src="{{profile.avatar.url}}" alt="">
-                        {% else %}
-                            <img style="border-radius: 0;" src="/static/img/profile_svg_icon.svg" alt="">
-                        {% endif %}
-                    </a>
-                    <span>{{ project.user.username }}</span>
-                </div>
-                <div class="action_project_author author_call">
-                    <a>{{ project_creater_profile.phone_number }}</a>
-                </div>
-
+            <div class="duplicate-contact_contact_buttons">
+                <div class="user_contact_buttons-item user_contact_buttons-call">Позвонить</div>
+                <div class="user_contact_buttons-item user_contact_buttons-message">Написать</div>
             </div>
         </div>
     </div>

@@ -1,0 +1,265 @@
+.profile_container {
+    margin-top: 100px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.header_profile {
+    margin: 0 auto;
+    width: fit-content;
+    max-width: 24.7%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile_info {
+    margin-bottom: 50px;
+}
+
+.header_profile_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_image {
+    width: 208px;
+    height: 208px;
+    border-radius: 50%;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+
+.header_profile_info_username {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.header_profile_info_status {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.header_profile_info_last_online {
+    font-size: 14px;    
+    margin-bottom: 35px;
+    color: rgba(33, 33, 33, 0.5);
+}
+
+.header_profile_info_last_online_znak {
+    color: rgb(255, 255, 255);
+}
+
+.contacts_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contact_button {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 50px;
+}
+
+.contact_button:hover {
+    cursor: pointer;
+}
+
+.contact_button_call {
+    background-color: #84DD28;
+    color: black;
+}
+
+.contact_button_message {
+    background-color: #212121;
+    color: white;
+}
+
+.profile_info_main_text {
+    font-size: 16px;
+    padding: 50px 25px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: 50px;
+}
+
+
+
+.profile_info_main_text h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.profile_info_main_text_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile_info_main_text_carier {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 181.97%;
+    margin-right: 50px;
+}
+
+.profile_info_main_text_carier_item {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.profile_info_main_text_carier_item span {
+    margin-bottom: 13px;
+}
+
+.profile_info_main_text_carier_item-info {
+    color: rgba(33, 33, 33, 0.5)
+}
+
+.profile_info_sub_text_container {
+    margin-top: 47px;
+}
+
+.profile_info_sub_text_container h2 {
+    font-weight: bold;
+}
+
+.user_media {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.user_media-container {
+    display: flex;
+    overflow: visible; 
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid black;
+}
+
+.user_media-projects h2 {
+    margin-bottom: 35px;
+    font-size: 24px;
+}
+
+
+.item_container {
+    min-width: 30%;
+    height: 30%;
+    position: relative;
+    border-radius: 20px;
+    margin-bottom: 31px;
+    margin-right: 35px;
+}
+
+
+.item {
+    margin-top: 5px;
+}
+
+.item_category {
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 6px 15px;
+    background-color: white;
+    box-shadow: 1px 4px 40px 12px rgba(34, 60, 80, 0.2);
+    text-align: center;
+    border-radius: 20px;
+}
+
+.item_image {
+    border-radius: 30px;
+    width: 100%;
+    min-height: 183px;
+    max-height: 183px;
+}
+
+.info_title {
+    width: fit-content;
+    font-size: 18px;
+}
+
+.info_body {
+    text-align: justify;
+    margin: 0 20px;
+    line-height: 1.2;
+}
+
+.info_metrics {
+    font-family: 'helvatica_light', sans-serif;
+    margin-right: 70px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+
+.metrics_metric {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 23%;
+    height: 20%;
+}
+
+.metrics_metric:nth-child(3n){
+    border: 0;
+}
+
+.metrics_metric:nth-child(2n) {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    padding: 0 20px;
+}
+
+.item_container_image, .item_container_video {
+    background-size: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 30px;
+}
+
+.item_container-photo, .item_container_video {
+    min-width: 14.2%;
+    min-height: 150px;
+    margin-bottom: 0;
+}
+
+.user_media h2 {
+    margin-bottom: 35px;
+}
+
+.item_container-video {
+    min-width: 22.2%;
+    max-width: 22.2%;
+    aspect-ratio: 1 / 1.5;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.item_container_video {
+    height: 100%;
+    max-width: 100%;
+}
+
+.user_media:last-child {
+    border-bottom: 0;
+}
+
+.user_media-container_videos {
+    border-bottom: 0;
+}
