@@ -13,9 +13,9 @@
     <div class="profile_container">
         <div class="header_profile">
             <div class="header_profile_info">
-                <div class="profile_image" style="background-image: url('/static/img/example_avatar_profile.jpg');"></div>
-                <h2 class="header_profile_info_username">Денис Зубенко</h2>
-                <div class="header_profile_info_status">Сооснователь сервиса FoxInvest, хороший программист и человек :)</div>
+                <div class="profile_image" style="background-image: url('{{profile.avatar.url}}');"></div>
+                <h2 class="header_profile_info_username">{{profile.username}}</h2>
+                <div class="header_profile_info_status">{{profile.profile_status}}</div>
                 <div class="header_profile_info_last_online"><span class="header_profile_info_last_online_znak">⚫</span> Был(а) в сети в 22:22</div>
                 <div class="contacts_buttons">
                     <div class="contact_button contact_button_call">Позвонить</div>
@@ -36,23 +36,23 @@
                             <span>Сайт компании</span>
                         </div>
                         <div class="profile_info_main_text_carier_item profile_info_main_text_carier_item-info">
-                            <span>StarInvest</span>
-                            <span>Cистемное програмное обеспечение </span>
-                            <span>Программист</span>
-                            <span>StarInves.com</span>
+                            <span>{{profile.company}}</span>
+                            <span>{{profile.branch}}</span>
+                            <span>{{profile.position_on_company}}</span>
+                            <span>{{profile.site_company}}</span>
                         </div>
                     </div>
                     <div class="profile_info_main_text_about_i">
                         <h2>О СЕБЕ</h2>
                         <div class="profile_info_main_text_about_i_text">
-                            Что-то здесь надо писать но по желанию :) Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию 
+                            {{profile.about_user}}
                         </div>
                     </div>
                 </div>
                 <div class="profile_info_sub_text_container">
                     <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
                     <div class="profile_info_sub_text">
-                        Что-то здесь надо писать но по желанию :) Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)Что-то здесь надо писать но по желанию :)
+                        {{profile.about_user_sub_info}}
                     </div>
                 </div>
             </div>
@@ -60,139 +60,48 @@
         <div class="user_media user_media-projects">
             <h2>Проекты пользователя</h2>
             <div class="user_media-container">
-                <div class="item_container">
-                    <div class="item">
-                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-                        <a class="item_image_a" href="#">
-                            <img class="item_image" src="/static/img/park.png" alt="" >
-                        </a>
-                        <div class="item_info">
-                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                                <div class="info_metrics">
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                                </div>
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                                    <span class="metric_profitability     metric_profitability--info">20%</span>
-                                </div>
-                                <div class="metrics_metric metric_income">
-                                    <span class="metric_info">
-                                        Прибыль есть
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item_container">
-                    <div class="item">
-                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-                        <a class="item_image_a" href="#">
-                            <img class="item_image" src="/static/img/park.png" alt="" >
-                        </a>
-                        <div class="item_info">
-                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                                <div class="info_metrics">
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                                </div>
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                                    <span class="metric_profitability     metric_profitability--info">20%</span>
-                                </div>
-                                <div class="metrics_metric metric_income">
-                                    <span class="metric_info">
-                                        Прибыль есть
-                                    </span>
+                {% for project in projects %}
+                    <div  class="item_container">
+                        <div class="item">
+                            <div class="item_category"><a class="item_category_a" href="#">{{project.category}}</a></div>
+                            <a class="item_image_a" href="{% url 'project' project.id %}">
+                                <img class="item_image" src="{{ project.images.first.image.url }}" alt="" >
+                            </a>
+                            <div class="item_info">
+                                <h2 class="info_title"><a class="info_title_a" href="#">{{project.title}}</a></h2>
+                                    <div class="info_metrics">
+                                    <div class="metrics_metric metric_attachments">
+                                        <span class="metric_help_text metric_attachments--help_text">Вложения</span>
+                                        <span class="metric_info      metric_attachments--info metric_attachments--required_investment">{{project.required_investment}} ₽</span>
+                                    </div>
+                                    <div class="metrics_metric metric_attachments">
+                                        <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
+                                        <span class="metric_profitability     metric_profitability--info">{{project.profit_number}}% в {{project.profit_parametr}}</span>
+                                    </div>
+                                    <div class="metrics_metric metric_income">
+                                        <span class="metric_info">
+                                            {% if project.profit %}
+                                                Прибыль есть
+                                            {% else %}
+                                                Без прибыли
+                                            {% endif %}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="item_container">
-                    <div class="item">
-                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-                        <a class="item_image_a" href="#">
-                            <img class="item_image" src="/static/img/park.png" alt="" >
-                        </a>
-                        <div class="item_info">
-                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                                <div class="info_metrics">
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                                </div>
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                                    <span class="metric_profitability     metric_profitability--info">20%</span>
-                                </div>
-                                <div class="metrics_metric metric_income">
-                                    <span class="metric_info">
-                                        Прибыль есть
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item_container">
-                    <div class="item">
-                        <div class="item_category"><a class="item_category_a" href="#">Экология</a></div>
-                        <a class="item_image_a" href="#">
-                            <img class="item_image" src="/static/img/park.png" alt="" >
-                        </a>
-                        <div class="item_info">
-                            <h2 class="info_title"><a class="info_title_a" href="#">Эко-парк “Лиственник”</a></h2>
-                                <div class="info_metrics">
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text metric_attachments--help_text">Вложения</span>
-                                    <span class="metric_info      metric_attachments--info">1млн ₽</span>
-                                </div>
-                                <div class="metrics_metric metric_attachments">
-                                    <span class="metric_help_text         metric_profitability--help_text">Доходность</span>
-                                    <span class="metric_profitability     metric_profitability--info">20%</span>
-                                </div>
-                                <div class="metrics_metric metric_income">
-                                    <span class="metric_info">
-                                        Прибыль есть
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="user_media user_media-photos">
             <h2>Фотографии пользователя</h2>
             <div class="user_media-container">
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
-                <div class="item_container item_container-photo">
-                    <div class="item_container_image" style="background-image: url('/static/img/example_profile_photos.png');"></div>
-                </div>
+                {% for photo in profile.images.all %}
+                    <div class="item_container item_container-photo">
+                        <div class="item_container_image" style="background-image: url('{{photo.image.url}}');"></div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <div class="user_media user_media-videos">
@@ -217,9 +126,19 @@
         </div>
     </div>
     <script>
-        if ({{current_profile.user.id}} != {{user.id}}){
+        if ({{profile.user.id}} != {{user.id}}){
             document.getElementsByClassName('change_profile')[0].remove()
         }
+        let required_investment = document.querySelectorAll('.metric_attachments--required_investment')
+        for (let i=0; i < required_investment.length; i++) {
+            console.log(+required_investment[i].innerHTML)
+            let numer_required_investment = required_investment[i].innerHTML.split(' ')[0]
+            if (+numer_required_investment > 999999 && +numer_required_investment < 99999999){
+                required_investment[i].innerHTML = String(numer_required_investment).slice(0,-6) + ' млн ₽' 
+            }
+        }
+
+
     </script>
 
 

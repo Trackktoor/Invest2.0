@@ -136,10 +136,8 @@ def activate(request, uidb64, token):
         return render(request, 'account/signup_link_error.html')
     
 def profile(request, user_id):
-    user = User.objects.get(id=user_id)
-    profile = Profile.objects.get(user=user)
-    profile.user.username = profile.user.username.split('_')[0]
-    return render(request, 'account/profile.html', {'current_profile':profile})
+    projects = Item.objects.filter(user=user_id)
+    return render(request, 'account/profile.html', {'projects':projects})
 
 @login_required
 def edit_profile(request):

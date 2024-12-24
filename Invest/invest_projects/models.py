@@ -34,10 +34,11 @@ class Item(models.Model):
     description = models.TextField()
     city = models.CharField(max_length=255, blank=True, null=True)
     required_investment = models.IntegerField(blank=True, null=True)
-    profit_per_month = models.CharField(max_length=255, blank=True, null=True)
+    profit_number = models.CharField(max_length=255, blank=True, null=True)
+    profit = models.BooleanField(default=False)
     profit_parametr = models.CharField(max_length=100,default='Месяц')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     images = models.ManyToManyField(
         'ItemImage', related_name='images_for_item')
     background_image = models.ImageField(upload_to=save_image, blank=True, null=True, max_length=500)

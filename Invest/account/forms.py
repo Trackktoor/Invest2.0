@@ -22,7 +22,7 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = ['title', 'description', 'city',
-                  'required_investment', 'profit_per_month', 'user', 'category']
+                  'required_investment', 'profit_number', 'user', 'category']
 
 
 class SignupForm(UserCreationForm):

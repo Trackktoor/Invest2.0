@@ -15,7 +15,7 @@ def projects_map(project):
     for key in project_dict.keys():
         if type(project_dict[key]) == ImageFieldFile:
             project_dict[key] = project_dict[key].url
-    project_dict['category'] = project.category.first().title
+    project_dict['category'] = project.category.title
     project_dict['images_urls'] = images_urls
     return project_dict
 
